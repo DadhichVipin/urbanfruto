@@ -47,7 +47,7 @@ export default function AdminLogin() {
                 required
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
-                placeholder="admin@urbanfresh.in"
+                placeholder="admin@urbanfruto.com"
                 className="w-full bg-transparent text-sm outline-none"
               />
             </span>

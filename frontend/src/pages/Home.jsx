@@ -254,10 +254,10 @@ export default function Home() {
         <div className="uf-shell text-center">
           <p className="uf-eyebrow text-[#e4601f]">Unrivaled Quality Standard</p>
           <h2 className="uf-display mx-auto mt-3 max-w-2xl text-3xl font-bold text-[#0f3d23] sm:text-4xl">
-            The Urban Fresh Difference
+            The Urban Fruto Difference
           </h2>
           <p className="mx-auto mt-3 max-w-2xl text-sm text-[#436a51] md:text-base">
-            Unlike standard marketplace grocery deliveries, every Urban Fresh hamper undergoes a museum-grade quality
+            Unlike standard marketplace grocery deliveries, every Urban Fruto hamper undergoes a museum-grade quality
             intake protocol before hand-assembly.
           </p>
           <div className="mt-10 grid gap-5 text-left sm:grid-cols-2 lg:grid-cols-4">

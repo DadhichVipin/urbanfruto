@@ -3,6 +3,7 @@ import { Link, useLocation, useNavigate } from "react-router-dom";
 import { Search, ShoppingBag, MapPin, Truck, Menu, X, ShieldCheck, Thermometer } from "lucide-react";
 import { useCart } from "@/store/CartContext";
 import { api } from "@/lib/api";
+import { BRAND_NAME, LOGO } from "@/constants/brand";
 
 const NAV = [
   { label: "Home", to: "/" },
@@ -10,20 +11,10 @@ const NAV = [
   { label: "Fruits", to: "/fruits" },
 ];
 
-export const Logo = ({ light = false }) => (
-  <Link to="/" data-testid="brand-logo" className="flex items-center gap-2.5">
-    <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full border border-[#cfe3c6] bg-white">
-      <span className="uf-display text-base font-black leading-none text-[#e4601f]">U</span>
-      <span className="uf-display -ml-1 text-base font-black leading-none text-[#0f3d23]">F</span>
-    </span>
-    <span className="leading-none">
-      <span className={`uf-display block text-[19px] font-bold ${light ? "text-[#f3fbee]" : "text-[#0f3d23]"}`}>
-        Urban Fresh
-      </span>
-      <span className={`block text-[9px] font-semibold tracking-[0.18em] ${light ? "text-[#b7d7ac]" : "text-[#6d8a63]"}`}>
-        BOTANICALS &amp; ORCHARD
-      </span>
-    </span>
+export const Logo = () => (
+  <Link to="/" data-testid="brand-logo" aria-label={BRAND_NAME} className="flex shrink-0 items-center gap-1.5">
+    <img src={LOGO.mark} alt="" className="h-11 w-auto" />
+    <img src={LOGO.wordmark} alt={BRAND_NAME} className="h-10 w-auto" />
   </Link>
 );
 

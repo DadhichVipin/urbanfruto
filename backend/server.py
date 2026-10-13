@@ -30,7 +30,7 @@ JWT_ALG = "HS256"
 ADMIN_EMAIL = os.environ['ADMIN_EMAIL']
 ADMIN_PASSWORD = os.environ['ADMIN_PASSWORD']
 
-app = FastAPI(title="Urban Fresh API")
+app = FastAPI(title="Urban Fruto API")
 api = APIRouter(prefix="/api")
 bearer = HTTPBearer(auto_error=False)
 
@@ -188,7 +188,7 @@ async def upload_image(
 # ---------------- Public catalog ----------------
 @api.get("/")
 async def root():
-    return {"message": "Urban Fresh API"}
+    return {"message": "Urban Fruto API"}
 
 
 @api.get("/hampers")
@@ -246,7 +246,7 @@ async def notify_slack(enquiry: Dict[str, Any]):
         return False
     lines = [f"• {i['name']} x{i['qty']} — ₹{i['price']:,.0f}" + (f" ({i['meta']})" if i.get("meta") else "") for i in enquiry["items"]]
     text = (
-        f"*New Urban Fresh Order Enquiry* `{enquiry['ref']}`\n"
+        f"*New Urban Fruto Order Enquiry* `{enquiry['ref']}`\n"
         f"*Customer:* {enquiry['name']} | {enquiry['phone']} | {enquiry.get('email') or '-'}\n"
         f"*Deliver to:* {enquiry.get('address') or '-'}, {enquiry.get('city') or '-'} {enquiry.get('pincode') or ''}\n"
         f"*Preferred slot:* {enquiry.get('delivery_date') or 'Earliest 3-hour slot'}\n"
@@ -424,7 +424,7 @@ async def admin_put_settings(body: SettingsIn, admin=Depends(admin_required)):
 @api.post("/admin/settings/test-slack")
 async def admin_test_slack(admin=Depends(admin_required)):
     ok = await notify_slack({
-        "ref": "TEST", "name": "Urban Fresh Admin", "phone": "-", "email": admin.get("email"),
+        "ref": "TEST", "name": "Urban Fruto Admin", "phone": "-", "email": admin.get("email"),
         "address": "-", "city": "-", "pincode": "-", "delivery_date": "-",
         "items": [{"name": "Test hamper", "qty": 1, "price": 0, "meta": "connection test"}],
         "total": 0, "message": "Slack webhook connection test",
@@ -480,7 +480,7 @@ async def startup():
     email = ADMIN_EMAIL.lower().strip()
     if not await db.admins.find_one({"email": email}):
         await db.admins.insert_one({
-            "id": new_id(), "email": email, "name": "Urban Fresh Admin",
+            "id": new_id(), "email": email, "name": "Urban Fruto Admin",
             "password_hash": bcrypt.hashpw(ADMIN_PASSWORD.encode(), bcrypt.gensalt()).decode(),
             "created_at": now_iso(),
         })

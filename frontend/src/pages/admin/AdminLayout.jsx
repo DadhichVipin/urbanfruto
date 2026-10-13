@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { Link, Navigate, NavLink, Outlet, useNavigate } from "react-router-dom";
 import { Boxes, Inbox, LayoutDashboard, LogOut, Settings, Users, ExternalLink, Menu, X } from "lucide-react";
 import { api } from "@/lib/api";
+import { BRAND_NAME, LOGO } from "@/constants/brand";
 
 const NAV = [
   { to: "/admin", label: "Dashboard", icon: LayoutDashboard, end: true },
@@ -36,8 +37,11 @@ export default function AdminLayout() {
     <div data-testid="admin-layout" className="min-h-screen bg-[#eaf6e4] lg:flex">
       <aside className="shrink-0 bg-[#0f3d23] lg:w-[246px]">
         <div className="flex items-center justify-between px-5 py-4">
-          <Link to="/admin" className="uf-display text-lg font-bold text-[#f3fbee]">
-            Urban Fresh <span className="text-[#e4601f]">·</span> Admin
+          <Link to="/admin" className="flex items-center gap-2.5 uf-display text-lg font-bold text-[#f3fbee]">
+            <span className="grid h-9 w-9 place-items-center rounded-full bg-[#f3fbee]">
+              <img src={LOGO.mark} alt="" className="h-6 w-auto" />
+            </span>
+            {BRAND_NAME} <span className="text-[#e4601f]">·</span> Admin
           </Link>
           <button data-testid="admin-sidebar-toggle" onClick={() => setOpen((v) => !v)} className="text-[#cfe6c4] lg:hidden">
             {open ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}

@@ -28,7 +28,7 @@
   ],
   "updated_files": [],
   "success_rate": {"backend": "100% (21/21)", "frontend": "~85% — all functional flows pass; responsiveness fails on hamper/fruit detail pages below 1024px"},
-  "test_credentials": "Admin vipin11dadhich@gmail.com / UrbanFresh@2026 (works)",
+  "test_credentials": "Admin vipin11dadhich@gmail.com / <redacted> (works)",
   "seed_data_creation": "Created test enquiry UF1004 (TEST E2E Reviewer, +919812345679) via guest checkout flow.",
   "retest_needed": true,
   "main_agent_can_self_test": true,

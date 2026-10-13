@@ -274,9 +274,6 @@ export default function Header() {
               className="rounded-xl px-3 py-3 text-[15px] font-semibold text-gray-700 hover:bg-slate-50 aria-[current=page]:text-[#3e6425]"
             />
           ))}
-          <Link to="/admin/login" className="rounded-xl px-3 py-3 text-[15px] font-semibold text-[#eb5a28] hover:bg-slate-50">
-            Admin Panel
-          </Link>
         </nav>
       )}
     </header>

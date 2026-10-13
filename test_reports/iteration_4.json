@@ -19,7 +19,7 @@
   ],
   "updated_files": ["/app/backend/tests/test_enquiry_ref_concurrency.py (new)"],
   "success_rate": {"backend": "100% (23/23)", "frontend": "~98% — only minor admin overflow at exactly 1024px remains"},
-  "test_credentials": "Admin vipin11dadhich@gmail.com / UrbanFresh@2026 (works)",
+  "test_credentials": "Admin vipin11dadhich@gmail.com / <redacted> (works)",
   "seed_data_creation": "Created 10 TEST_ enquiries during this run (5 concurrent, 3 sequential, 1 regular test, 1 E2E UF1014). ALL 13 TEST_/SMOKE enquiries deleted via DELETE /api/admin/enquiries/{id} at end. 5 TEST_* customers (TEST_Buyer, TEST_StatusBuyer, TEST_Concurrent_102, TEST_E2E_Final, SMOKE Ref) remain in db — no admin DELETE endpoint for customers exists, upsert-by-phone keeps them persistent. If cleanup is required, add DELETE /api/admin/customers/{id} or wipe by phone-prefix script.",
   "retest_needed": false,
   "main_agent_can_self_test": true,

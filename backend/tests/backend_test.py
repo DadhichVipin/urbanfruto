@@ -15,20 +15,26 @@ if not BASE_URL:
 BASE_URL = BASE_URL.rstrip("/")
 API = f"{BASE_URL}/api"
 
-ADMIN_EMAIL = "vipin11dadhich@gmail.com"
-ADMIN_PASSWORD = "UrbanFresh@2026"
+# Never hard-code credentials here. Create a test admin with scripts/create_admin.py and export:
+#   TEST_ADMIN_EMAIL=... TEST_ADMIN_PASSWORD=... pytest
+ADMIN_EMAIL = os.environ.get("TEST_ADMIN_EMAIL", "")
+ADMIN_PASSWORD = os.environ.get("TEST_ADMIN_PASSWORD", "")
+SESSION_COOKIE = "uf_admin_session"
 
 
 @pytest.fixture(scope="session")
 def admin_token():
+    if not (ADMIN_EMAIL and ADMIN_PASSWORD):
+        pytest.skip("TEST_ADMIN_EMAIL / TEST_ADMIN_PASSWORD not set")
     r = requests.post(f"{API}/admin/login", json={"email": ADMIN_EMAIL, "password": ADMIN_PASSWORD}, timeout=15)
     assert r.status_code == 200, f"Admin login failed: {r.status_code} {r.text}"
-    return r.json()["token"]
+    return r.cookies[SESSION_COOKIE]
 
 
 @pytest.fixture(scope="session")
 def auth_headers(admin_token):
-    return {"Authorization": f"Bearer {admin_token}"}
+    # Sent as an explicit Cookie header so it also works against http://localhost.
+    return {"Cookie": f"{SESSION_COOKIE}={admin_token}"}
 
 
 # ---------------- Public catalog ----------------
@@ -116,12 +122,10 @@ class TestEnquiries:
 
 # ---------------- Admin auth ----------------
 class TestAdminAuth:
-    def test_login_ok(self):
-        r = requests.post(f"{API}/admin/login", json={"email": ADMIN_EMAIL, "password": ADMIN_PASSWORD}, timeout=15)
-        assert r.status_code == 200
-        assert "token" in r.json()
+    def test_login_ok(self, admin_token):
+        assert admin_token
 
-    def test_login_bad(self):
+    def test_login_bad(self, admin_token):
         r = requests.post(f"{API}/admin/login", json={"email": ADMIN_EMAIL, "password": "wrong"}, timeout=15)
         assert r.status_code == 401
 
@@ -135,7 +139,7 @@ class TestAdminAuth:
         assert r.status_code == 401
 
     def test_protected_bad_token(self):
-        r = requests.get(f"{API}/admin/hampers", headers={"Authorization": "Bearer invalid"}, timeout=15)
+        r = requests.get(f"{API}/admin/hampers", headers={"Cookie": f"{SESSION_COOKIE}=invalid"}, timeout=15)
         assert r.status_code == 401
 
 

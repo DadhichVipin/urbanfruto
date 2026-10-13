@@ -29,7 +29,7 @@
   ],
   "updated_files": [],
   "success_rate": {"backend": "100%", "frontend": "100%"},
-  "test_credentials": "Admin: vipin11dadhich@gmail.com / UrbanFresh@2026 (verified working)",
+  "test_credentials": "Admin: vipin11dadhich@gmail.com / <redacted> (verified working)",
   "seed_data_creation": "Created TEST_User enquiry UF1027 + customer during UI checkout test. Cleaned up via admin API at end of run.",
   "retest_needed": false,
   "should_main_agent_self_test": false,

@@ -15,7 +15,7 @@
   ],
   "updated_files": ["/app/backend/tests/backend_test.py"],
   "success_rate": {"backend": "100% (21/21)", "frontend": "100% (12/12 flows + mobile viewport checks)"},
-  "test_credentials": "Admin: vipin11dadhich@gmail.com / UrbanFresh@2026 (from /app/memory/test_credentials.md)",
+  "test_credentials": "Admin: vipin11dadhich@gmail.com / <redacted> (from /app/memory/test_credentials.md)",
   "seed_data_creation": "No manual seed - backend auto-seeds admin + 6 hampers + 8 fruits + settings on startup. Test created a few TEST_ enquiries/customers and TEST_ hampers/fruits (all cleaned by DELETE at end of each CRUD test). One UI-created hamper 'TEST UI Hamper XZ' may remain in DB from the admin inventory add UI test - main agent can delete via admin panel if desired.",
   "retest_needed": false,
   "should_main_agent_self_test": false,

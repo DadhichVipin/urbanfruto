@@ -20,7 +20,7 @@
   ],
   "updated_files": [],
   "success_rate": {"backend": "100% (21/21)", "frontend": "~98% (all critical flows pass; only 768px minor overflow + mobile empty-toast detection minor)"},
-  "test_credentials": "Admin vipin11dadhich@gmail.com / UrbanFresh@2026 (works)",
+  "test_credentials": "Admin vipin11dadhich@gmail.com / <redacted> (works)",
   "seed_data_creation": "Created one test enquiry UF1004 (TEST Reviewer, +919812345678) via guest checkout flow.",
   "retest_needed": false,
   "main_agent_can_self_test": true,

@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { Link, Navigate, NavLink, Outlet, useNavigate } from "react-router-dom";
+import { Loader2 } from "lucide-react";
 import { Boxes, Inbox, LayoutDashboard, LogOut, Settings, Users, ExternalLink, Menu, X } from "lucide-react";
 import { api } from "@/lib/api";
 import { BRAND_NAME, LOGO } from "@/constants/brand";
@@ -13,24 +14,36 @@ const NAV = [
 ];
 
 export default function AdminLayout() {
-  const token = localStorage.getItem("uf_admin_token");
   const navigate = useNavigate();
+  // "checking" until the backend confirms the session cookie; nothing admin renders before that.
+  const [status, setStatus] = useState("checking");
   const [admin, setAdmin] = useState(null);
   const [open, setOpen] = useState(false);
 
   useEffect(() => {
-    if (!token) return;
-    api.get("/admin/me").then((r) => setAdmin(r.data)).catch(() => {
-      localStorage.removeItem("uf_admin_token");
-      navigate("/admin/login");
-    });
-  }, [token, navigate]);
-
-  if (!token) return <Navigate to="/admin/login" replace />;
-
-  const logout = () => {
+    // Tokens used to live in localStorage; clear any left behind.
     localStorage.removeItem("uf_admin_token");
-    navigate("/admin/login");
+    localStorage.removeItem("uf_admin_email");
+    api
+      .get("/admin/me")
+      .then((r) => {
+        setAdmin(r.data);
+        setStatus("ok");
+      })
+      .catch(() => setStatus("denied"));
+  }, []);
+
+  if (status === "denied") return <Navigate to="/admin/login" replace />;
+  if (status === "checking")
+    return (
+      <div className="grid min-h-screen place-items-center bg-[#f7f7f8]" aria-busy="true">
+        <Loader2 className="h-6 w-6 animate-spin text-[#0f3d23]" aria-label="Loading" />
+      </div>
+    );
+
+  const logout = async () => {
+    await api.post("/admin/logout").catch(() => {});
+    navigate("/admin/login", { replace: true });
   };
 
   return (

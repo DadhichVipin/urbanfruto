@@ -33,9 +33,6 @@ export default function Footer() {
               {l.label}
             </Link>
           ))}
-          <Link to="/admin/login" data-testid="footer-admin-link" className="font-semibold text-[#e4601f] hover:text-[#ff7b3a]">
-            Admin Panel
-          </Link>
         </div>
 
         <div className="flex flex-col gap-4">

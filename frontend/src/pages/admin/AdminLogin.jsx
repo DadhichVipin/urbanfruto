@@ -16,10 +16,9 @@ export default function AdminLogin() {
     setBusy(true);
     setErr("");
     try {
-      const { data } = await api.post("/admin/login", { email, password });
-      localStorage.setItem("uf_admin_token", data.token);
-      localStorage.setItem("uf_admin_email", data.admin.email);
-      navigate("/admin");
+      await api.post("/admin/login", { email, password });
+      setPassword("");
+      navigate("/admin", { replace: true });
     } catch (e2) {
       setErr(e2?.response?.data?.detail || "Login failed");
     } finally {
@@ -44,10 +43,11 @@ export default function AdminLogin() {
               <input
                 data-testid="admin-email-input"
                 type="email"
+                autoComplete="username"
                 required
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
-                placeholder="admin@urbanfruto.com"
+                placeholder="you@example.com"
                 className="w-full bg-transparent text-sm outline-none"
               />
             </span>
@@ -60,6 +60,7 @@ export default function AdminLogin() {
               <input
                 data-testid="admin-password-input"
                 type="password"
+                autoComplete="current-password"
                 required
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}

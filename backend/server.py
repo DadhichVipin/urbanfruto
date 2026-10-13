@@ -1,6 +1,5 @@
-from fastapi import FastAPI, APIRouter, HTTPException, Depends, UploadFile, File, Form
+from fastapi import FastAPI, APIRouter, HTTPException, Depends, UploadFile, File, Form, Request, Response
 from fastapi.concurrency import run_in_threadpool
-from fastapi.security import HTTPBearer, HTTPAuthorizationCredentials
 from dotenv import load_dotenv
 from starlette.middleware.cors import CORSMiddleware
 from motor.motor_asyncio import AsyncIOMotorClient
@@ -27,12 +26,27 @@ db = client[os.environ['DB_NAME']]
 
 JWT_SECRET = os.environ['JWT_SECRET']
 JWT_ALG = "HS256"
-ADMIN_EMAIL = os.environ['ADMIN_EMAIL']
-ADMIN_PASSWORD = os.environ['ADMIN_PASSWORD']
 
-app = FastAPI(title="Urban Fruto API")
+# Admin session: a JWT in an httpOnly cookie (JavaScript can't read it, so XSS can't steal it).
+SESSION_COOKIE = "uf_admin_session"
+SESSION_HOURS = 12
+# Browsers only send Secure cookies over HTTPS; set COOKIE_SECURE=false for local http dev.
+COOKIE_SECURE = os.environ.get("COOKIE_SECURE", "true").lower() != "false"
+
+# Brute-force protection: failed logins are counted per email and per IP over a rolling window.
+LOGIN_WINDOW_SECONDS = 15 * 60
+MAX_FAILS_PER_EMAIL = 5
+MAX_FAILS_PER_IP = 20
+
+# API docs expose every admin route; keep them off unless explicitly enabled.
+_docs = os.environ.get("ENABLE_API_DOCS", "false").lower() == "true"
+app = FastAPI(
+    title="Urban Fruto API",
+    docs_url="/api/docs" if _docs else None,
+    redoc_url=None,
+    openapi_url="/api/openapi.json" if _docs else None,
+)
 api = APIRouter(prefix="/api")
-bearer = HTTPBearer(auto_error=False)
 
 logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(name)s - %(levelname)s - %(message)s')
 logger = logging.getLogger(__name__)
@@ -132,30 +146,87 @@ class SettingsIn(BaseModel):
 
 
 # ---------------- Auth ----------------
-def make_token(email: str) -> str:
-    payload = {"sub": email, "role": "admin", "exp": datetime.now(timezone.utc) + timedelta(days=7)}
+# Compared against when the email is unknown, so the response time doesn't reveal which emails exist.
+_DUMMY_HASH = bcrypt.hashpw(b"timing-equalizer", bcrypt.gensalt()).decode()
+
+
+def make_token(admin: dict) -> str:
+    now = datetime.now(timezone.utc)
+    payload = {
+        "sub": admin["email"],
+        "role": "admin",
+        # Bumped by scripts/create_admin.py on password reset, which revokes existing sessions.
+        "ver": admin.get("token_version", 0),
+        "iat": now,
+        "exp": now + timedelta(hours=SESSION_HOURS),
+    }
     return jwt.encode(payload, JWT_SECRET, algorithm=JWT_ALG)
 
 
-async def admin_required(creds: Optional[HTTPAuthorizationCredentials] = Depends(bearer)):
-    if not creds:
+def set_session_cookie(response: Response, token: str) -> None:
+    response.set_cookie(
+        SESSION_COOKIE, token,
+        max_age=SESSION_HOURS * 3600, path="/api",
+        httponly=True, secure=COOKIE_SECURE, samesite="strict",
+    )
+
+
+async def admin_required(request: Request):
+    token = request.cookies.get(SESSION_COOKIE)
+    if not token:
         raise HTTPException(401, "Not authenticated")
     try:
-        payload = jwt.decode(creds.credentials, JWT_SECRET, algorithms=[JWT_ALG])
+        payload = jwt.decode(token, JWT_SECRET, algorithms=[JWT_ALG], options={"require": ["exp", "sub"]})
     except jwt.PyJWTError:
-        raise HTTPException(401, "Invalid or expired token")
-    admin = await db.admins.find_one({"email": payload.get("sub")}, {"_id": 0, "password_hash": 0})
-    if not admin:
-        raise HTTPException(401, "Admin not found")
+        raise HTTPException(401, "Session expired, please log in again")
+    if payload.get("role") != "admin":
+        raise HTTPException(401, "Not authenticated")
+    admin = await db.admins.find_one({"email": payload["sub"]}, {"_id": 0, "password_hash": 0})
+    if not admin or admin.get("token_version", 0) != payload.get("ver"):
+        raise HTTPException(401, "Session expired, please log in again")
     return admin
 
 
+def client_ip(request: Request) -> str:
+    # uvicorn runs with --proxy-headers behind Caddy, so this is the real visitor IP.
+    return request.client.host if request.client else "unknown"
+
+
+async def too_many_failures(email: str, ip: str) -> bool:
+    since = datetime.now(timezone.utc) - timedelta(seconds=LOGIN_WINDOW_SECONDS)
+    by_email = await db.login_failures.count_documents({"key": f"email:{email}", "at": {"$gte": since}})
+    by_ip = await db.login_failures.count_documents({"key": f"ip:{ip}", "at": {"$gte": since}})
+    return by_email >= MAX_FAILS_PER_EMAIL or by_ip >= MAX_FAILS_PER_IP
+
+
 @api.post("/admin/login")
-async def admin_login(body: AdminLogin):
-    admin = await db.admins.find_one({"email": body.email.lower().strip()}, {"_id": 0})
-    if not admin or not bcrypt.checkpw(body.password.encode(), admin["password_hash"].encode()):
+async def admin_login(body: AdminLogin, request: Request, response: Response):
+    email = body.email.lower().strip()
+    ip = client_ip(request)
+    if await too_many_failures(email, ip):
+        raise HTTPException(429, "Too many failed attempts. Try again in 15 minutes.")
+
+    admin = await db.admins.find_one({"email": email}, {"_id": 0})
+    stored_hash = admin["password_hash"] if admin else _DUMMY_HASH
+    # bcrypt is CPU-bound; run it off the event loop.
+    ok = await run_in_threadpool(bcrypt.checkpw, body.password.encode(), stored_hash.encode())
+    if not admin or not ok:
+        now = datetime.now(timezone.utc)
+        await db.login_failures.insert_many([{"key": f"email:{email}", "at": now}, {"key": f"ip:{ip}", "at": now}])
+        logger.warning("Failed admin login for %s from %s", email, ip)
         raise HTTPException(401, "Invalid email or password")
-    return {"token": make_token(admin["email"]), "admin": {"email": admin["email"], "name": admin.get("name", "Admin")}}
+
+    await db.login_failures.delete_many({"key": f"email:{email}"})
+    await db.admins.update_one({"email": email}, {"$set": {"last_login_at": now_iso(), "last_login_ip": ip}})
+    logger.info("Admin login: %s from %s", email, ip)
+    set_session_cookie(response, make_token(admin))
+    return {"admin": {"email": admin["email"], "name": admin.get("name", "Admin")}}
+
+
+@api.post("/admin/logout")
+async def admin_logout(response: Response):
+    response.delete_cookie(SESSION_COOKIE, path="/api", httponly=True, secure=COOKIE_SECURE, samesite="strict")
+    return {"ok": True}
 
 
 @api.get("/admin/me")
@@ -477,14 +548,16 @@ app.add_middleware(
 
 @app.on_event("startup")
 async def startup():
-    email = ADMIN_EMAIL.lower().strip()
-    if not await db.admins.find_one({"email": email}):
-        await db.admins.insert_one({
-            "id": new_id(), "email": email, "name": "Urban Fruto Admin",
-            "password_hash": bcrypt.hashpw(ADMIN_PASSWORD.encode(), bcrypt.gensalt()).decode(),
-            "created_at": now_iso(),
-        })
-        logger.info(f"Seeded admin {email}")
+    # Old failed-login records expire automatically.
+    await db.login_failures.create_index("at", expireAfterSeconds=LOGIN_WINDOW_SECONDS)
+    await db.admins.create_index("email", unique=True)
+
+    # Admins are never created from env vars; use scripts/create_admin.py.
+    if await db.admins.count_documents({}) == 0:
+        logger.warning(
+            "No admin users yet. Create one with: "
+            "docker compose exec backend python scripts/create_admin.py you@example.com"
+        )
 
     if not await db.settings.find_one({"key": "site"}):
         await db.settings.insert_one({

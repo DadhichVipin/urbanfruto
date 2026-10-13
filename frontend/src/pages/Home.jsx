@@ -1,12 +1,12 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 import { Link, useSearchParams } from "react-router-dom";
 import {
-  ArrowRight, ChevronLeft, ChevronRight, Droplet, Gift, Leaf, Snowflake,
-  Sparkles, Star, Truck, ShieldCheck, Zap, Wand2,
+  ChevronLeft, ChevronRight, Droplet, Gift, Leaf, Snowflake, Sparkles, Star, Zap, Wand2,
 } from "lucide-react";
-import { api, inr, media } from "@/lib/api";
+import { api, media } from "@/lib/api";
 import { useCart } from "@/store/CartContext";
 import { HamperCard } from "@/components/site/HamperCard";
+import Hero from "@/components/site/Hero";
 import { toast } from "sonner";
 
 const ICONS = { droplet: Droplet, zap: Zap, snowflake: Snowflake, gift: Gift, leaf: Leaf };
@@ -35,7 +35,6 @@ export default function Home() {
     api.get("/content").then((r) => setContent(r.data)).catch(() => {});
   }, []);
 
-  const hero = useMemo(() => hampers.find((h) => h.popular) || hampers[0], [hampers]);
   const shown = useMemo(
     () => (filter === "all" ? hampers : hampers.filter((h) => h.curation === filter)),
     [hampers, filter]
@@ -51,101 +50,9 @@ export default function Home() {
 
   return (
     <div data-testid="home-page">
-      {/* HERO */}
-      <section className="relative overflow-hidden bg-[#f7f7f8] uf-noise">
-        <div className="uf-shell relative grid items-center gap-10 py-12 lg:grid-cols-[1.05fr_1fr_136px] lg:gap-8 lg:py-20">
-          <div className="uf-rise">
-            <p className="uf-eyebrow flex items-center gap-3 text-[#4d7a5c]">
-              Nature's Goodness <span className="h-[2px] w-10 bg-[#e4601f]" />
-            </p>
-            <h1 className="uf-display mt-5 text-4xl font-black leading-[1.03] text-[#0f3d23] sm:text-5xl lg:text-6xl">
-              100% Farm Fresh
-              <span className="mt-1 block font-light italic">Exotic Fruit Hampers</span>
-            </h1>
-            <p className="mt-5 max-w-md text-sm leading-relaxed text-[#436a51] sm:text-base">
-              Crafted from hand-plucked botanical orchards across tropical groves and alpine foothills. Pure authentic
-              sweetness, zero preservatives, chilled to 4°C active perfection.
-            </p>
-            <div className="mt-7 flex flex-wrap gap-3">
-              <a href="#hampers" data-testid="hero-order-now" className="uf-btn-dark">
-                Order Now <ArrowRight className="h-4 w-4" />
-              </a>              <Link to="/fruits" data-testid="hero-build-custom" className="uf-btn-ghost">
-                <Gift className="h-4 w-4" /> Build Custom Box
-              </Link>
-            </div>
-            <div className="mt-8 flex flex-wrap gap-x-10 gap-y-4 text-xs">
-              <span className="flex items-start gap-2">
-                <Truck className="mt-0.5 h-4 w-4 text-[#e4601f]" />
-                <span>
-                  <b className="block text-[#0f3d23]">3-Hr Rapid Delivery</b>
-                  <span className="text-[#6d8a63]">Mumbai, Delhi &amp; BLR</span>
-                </span>
-              </span>
-              <span className="flex items-start gap-2">
-                <ShieldCheck className="mt-0.5 h-4 w-4 text-[#e4601f]" />
-                <span>
-                  <b className="block text-[#0f3d23]">FSSAI &amp; GlobalGAP</b>
-                  <span className="text-[#6d8a63]">100% Certified Safe</span>
-                </span>
-              </span>
-            </div>
-          </div>
+      <Hero />
 
-          <div className="relative uf-rise" style={{ animationDelay: "120ms" }}>
-            <span className="uf-chip absolute -top-3 left-1/2 z-10 -translate-x-1/2 shadow-sm">
-              <Leaf className="h-3.5 w-3.5 text-[#2f7a46]" /> 100% Organic Origin
-            </span>
-            <div className="rounded-[28px] border border-[#e7e9ec] bg-[#ffffff] p-3 shadow-[0_24px_60px_-28px_rgba(15,61,35,0.4)] sm:p-4">
-              <div className="relative overflow-hidden rounded-[20px]">
-                <img
-                  src={hero?.image || media("catalog/royal.jpg")}
-                  alt={hero?.name || "Fruit hamper"}
-                  className="h-[260px] w-full object-cover transition-transform duration-700 hover:scale-105 sm:h-[340px]"
-                />
-                <span className="absolute left-3 top-3 rounded-full bg-white/95 px-3 py-1 text-[10px] font-bold tracking-wide text-[#0f3d23]">
-                  • Plucked This Morning
-                </span>
-              </div>
-              {hero && (
-                <Link to={`/hampers/${hero.slug}`} className="mt-3 flex items-end justify-between px-1.5 pb-1">
-                  <span>
-                    <b className="block text-sm font-semibold text-[#0f3d23]">{hero.name}</b>
-                    <span className="text-[11px] text-[#6d8a63]">
-                      Weight: {hero.weight} · {hero.varieties} Premium Varieties
-                    </span>
-                  </span>
-                  <span className="text-right">
-                    <b className="uf-display block text-lg font-bold text-[#e4601f]">{inr(hero.price)}</b>
-                    {hero.compare_price && (
-                      <s className="text-[11px] text-[#9bb392]">{inr(hero.compare_price)}</s>
-                    )}
-                  </span>
-                </Link>
-              )}
-            </div>
-
-          </div>
-
-          <div className="grid grid-cols-2 gap-2.5 sm:grid-cols-4 lg:grid-cols-1 lg:gap-3">
-            {[
-                { icon: Leaf, t: "100%", s: "Natural Fruits" },
-                { icon: ShieldCheck, t: "Rich In", s: "Vitamins & Immunity" },
-                { icon: Sparkles, t: "15+", s: "Curated Fruits" },
-                { icon: Droplet, t: "Zero", s: "Preservatives" },
-              ].map(({ icon: Icon, t, s }) => (
-                <div key={t} className="uf-card flex items-center gap-2 p-2.5 lg:w-[132px] lg:flex-col lg:text-center">
-                  <span className="grid h-7 w-7 shrink-0 place-items-center rounded-full bg-[#f1f2f4]">
-                    <Icon className="h-3.5 w-3.5 text-[#2f7a46]" />
-                  </span>
-                  <span className="leading-tight">
-                    <b className="block text-[11px] font-bold text-[#0f3d23]">{t}</b>
-                    <span className="text-[9px] text-[#6d8a63]">{s}</span>
-                  </span>
-                </div>
-              ))}
-          </div>
-        </div>
-
+      <section className="relative overflow-hidden bg-white pt-8 lg:pt-12">
         {/* CURATIONS RAIL */}
         <div className="uf-shell pb-12">
           <div className="uf-card flex items-center gap-4 p-4 sm:gap-6 sm:p-5">
@@ -250,7 +157,7 @@ export default function Home() {
       </section>
 
       {/* DIFFERENCE */}
-      <section className="bg-[#eef0f2] py-16 lg:py-20">
+      <section id="story" className="scroll-mt-20 bg-[#eef0f2] py-16 lg:py-20">
         <div className="uf-shell text-center">
           <p className="uf-eyebrow text-[#e4601f]">Unrivaled Quality Standard</p>
           <h2 className="uf-display mx-auto mt-3 max-w-2xl text-3xl font-bold text-[#0f3d23] sm:text-4xl">

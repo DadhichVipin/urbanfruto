@@ -12,7 +12,7 @@ const LINKS = [
 
 export default function Footer() {
   return (
-    <footer data-testid="site-footer" className="bg-[#0f3d23] text-[#cfe6c4]">
+    <footer id="contact" data-testid="site-footer" className="scroll-mt-20 bg-[#0f3d23] text-[#cfe6c4]">
       <div className="uf-shell grid gap-10 py-14 md:grid-cols-[1.2fr_1fr_auto] md:gap-14">
         <div>
           <span className="inline-block rounded-2xl bg-[#ffffff] p-3">

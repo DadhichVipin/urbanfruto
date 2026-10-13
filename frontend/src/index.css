@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..900;1,9..144,300..900&family=Outfit:wght@300;400;500;600;700;800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..900;1,9..144,300..900&family=Outfit:wght@300;400;500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&display=swap');
 
 @tailwind base;
 @tailwind components;
@@ -66,6 +66,9 @@ body {
         font-family: 'Fraunces', Georgia, serif;
         font-variation-settings: 'SOFT' 0, 'WONK' 0;
         letter-spacing: -0.015em;
+    }
+    .uf-jakarta {
+        font-family: 'Plus Jakarta Sans', 'Outfit', ui-sans-serif, system-ui, sans-serif;
     }
     .uf-eyebrow {
         @apply text-[11px] font-semibold tracking-[0.22em] uppercase;

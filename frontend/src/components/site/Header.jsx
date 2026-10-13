@@ -89,7 +89,7 @@ export default function Header() {
             })}
           </nav>
 
-          <form onSubmit={submit} className="ml-auto hidden min-w-0 flex-1 max-w-[320px] items-center gap-2 rounded-full border border-[#cfe3c6] bg-white px-4 py-2.5 xl:flex">
+          <form onSubmit={submit} className="ml-auto flex min-w-0 flex-1 max-w-[320px] items-center gap-2 rounded-full border border-[#cfe3c6] bg-white px-3 py-2 md:px-4 md:py-2.5">
             <Search className="h-4 w-4 shrink-0 text-[#7e9b74]" />
             <input
               data-testid="header-search-input"
@@ -99,10 +99,6 @@ export default function Header() {
               className="w-full bg-transparent text-sm outline-none placeholder:text-[#8aa380]"
             />
           </form>
-
-          <Link to="/fruits" data-testid="customize-bucket-btn" className="uf-btn-dark ml-auto hidden shrink-0 whitespace-nowrap !px-4 !py-2.5 lg:inline-flex xl:ml-0 xl:!px-5">
-            <ShoppingBag className="h-4 w-4" /> Customize Bucket
-          </Link>
 
           <button
             data-testid="cart-button"

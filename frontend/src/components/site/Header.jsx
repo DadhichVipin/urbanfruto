@@ -19,14 +19,14 @@ export const Logo = ({ size = "md" }) => (
       alt=""
       width="442"
       height="496"
-      className={size === "hero" ? "h-[clamp(50px,4.4vw,64px)] w-auto" : "h-10 w-auto sm:h-11"}
+      className={size === "hero" ? "h-[clamp(42px,3.6vw,52px)] w-auto" : "h-10 w-auto sm:h-11"}
     />
     <img
       src={LOGO.wordmark}
       alt={BRAND_NAME}
       width="729"
       height="407"
-      className={size === "hero" ? "h-[clamp(44px,3.8vw,56px)] w-auto" : "h-9 w-auto sm:h-10"}
+      className={size === "hero" ? "h-[clamp(36px,3.1vw,46px)] w-auto" : "h-9 w-auto sm:h-10"}
     />
   </Link>
 );

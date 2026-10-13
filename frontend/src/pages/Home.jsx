@@ -20,6 +20,7 @@ const FILTERS = [
 
 export default function Home() {
   const [hampers, setHampers] = useState([]);
+  const [fruits, setFruits] = useState([]);
   const [content, setContent] = useState(null);
   const [filter, setFilter] = useState("all");
   const [params] = useSearchParams();
@@ -32,6 +33,7 @@ export default function Home() {
 
   useEffect(() => {
     api.get("/hampers").then((r) => setHampers(r.data)).catch(() => {});
+    api.get("/fruits").then((r) => setFruits(r.data)).catch(() => {});
     api.get("/content").then((r) => setContent(r.data)).catch(() => {});
   }, []);
 
@@ -59,31 +61,33 @@ export default function Home() {
             <div className="shrink-0">
               <p className="uf-eyebrow text-[#6d8a63]">Explore Our</p>
               <p className="uf-display text-lg font-bold">
-                Curations <span className="text-[#9bb392]">({content?.curations?.length || 8})</span>
+                Fruits <span className="text-[#9bb392]">({fruits.length})</span>
               </p>
             </div>
             <div ref={railRef} className="uf-scroll-x flex flex-1 gap-5 overflow-x-auto">
-              {(content?.curations || []).map((c) => (
+              {fruits.map((f) => (
                 <Link
-                  key={c.id}
-                  to={`/baskets?curation=${c.id}`}
-                  data-testid={`curation-${c.id}`}
+                  key={f.id || f.slug}
+                  to={`/fruits/${f.slug}`}
+                  data-testid={`fruit-rail-${f.slug}`}
                   className="group flex w-[76px] shrink-0 flex-col items-center gap-1.5 text-center"
                 >
                   <img
-                    src={c.image}
-                    alt={c.label}
+                    src={f.image}
+                    alt={f.short_name || f.name}
                     className="h-12 w-12 rounded-full border-2 border-[#e7e9ec] object-cover transition-all duration-300 group-hover:border-[#e4601f]"
                   />
-                  <span className="text-[10px] font-medium leading-tight text-[#436a51]">{c.label}</span>
+                  <span className="text-[10px] font-medium leading-tight text-[#436a51]">
+                    {f.short_name || f.name}
+                  </span>
                 </Link>
               ))}
             </div>
             <div className="hidden shrink-0 gap-2 sm:flex">
-              <button data-testid="curation-prev" onClick={() => scrollRail(-1)} className="grid h-8 w-8 place-items-center rounded-full border border-[#e2e4e8] bg-white">
+              <button data-testid="fruit-rail-prev" onClick={() => scrollRail(-1)} className="grid h-8 w-8 place-items-center rounded-full border border-[#e2e4e8] bg-white">
                 <ChevronLeft className="h-4 w-4" />
               </button>
-              <button data-testid="curation-next" onClick={() => scrollRail(1)} className="grid h-8 w-8 place-items-center rounded-full border border-[#e2e4e8] bg-white">
+              <button data-testid="fruit-rail-next" onClick={() => scrollRail(1)} className="grid h-8 w-8 place-items-center rounded-full border border-[#e2e4e8] bg-white">
                 <ChevronRight className="h-4 w-4" />
               </button>
             </div>

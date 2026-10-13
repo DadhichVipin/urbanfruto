@@ -46,6 +46,9 @@ const btnOutline = `${btnBase} border-[1.8px] border-[#3e6425] text-[#34531e] ho
 // right 60%, and the curved edge only bites into the photo near the top (orchard), so
 // it never covers the text or the family.
 //
+// The nav sits in its own row above the photo, so nothing overlaps the farmer's face
+// (top ~3–22% of the photo).
+//
 // Photo framing: the hero height is clamped so the photo always fills it by height, and
 // object-position 65% keeps all five faces (x 305–1200 of the 1376px source) in view
 // from 1024px to 1920px+, clear of the curve.
@@ -53,51 +56,49 @@ const GUTTER = "[--hero-gutter:max(2.5rem,calc((100vw-1360px)/2))]";
 
 function DesktopHero() {
   return (
-    <div
-      id="hero"
-      data-testid="hero-card"
-      className={`relative hidden h-[clamp(500px,44vw,760px)] overflow-hidden bg-white lg:block ${GUTTER}`}
-    >
-      <div className="absolute inset-y-0 right-0 w-[min(60%,1330px)]">
-        <HeroImage className="h-full w-full object-cover object-[65%_center]" />
-
-        <svg aria-hidden="true" viewBox="0 0 100 100" preserveAspectRatio="none" className="pointer-events-none absolute inset-0 h-full w-full">
-          <path fill="#7ca43b" d="M 7 0 C 13 8, 20 16, 19 27 C 18 40, 5 48, 3 62 C 2 74, 2 88, 4 100 L 6.6 100 C 4.6 88, 4.6 74, 5.8 62 C 7.8 48, 21.6 40, 22.6 27 C 23.6 16, 16.6 8, 10.6 0 Z" />
-          <path fill="#436f27" d="M 7 0 C 13 8, 20 16, 19 27 C 18 40, 5 48, 3 62 C 2 74, 2 88, 4 100 L 5.2 100 C 3.2 88, 3.2 74, 4.4 62 C 6.4 48, 19.8 40, 20.8 27 C 21.8 16, 14.8 8, 8.8 0 Z" />
-          <path fill="#ffffff" d="M 0 0 L 7.2 0 C 13.2 8, 20.2 16, 19.2 27 C 18.2 40, 5.2 48, 3.2 62 C 2.2 74, 2.2 88, 4.2 100 L 0 100 Z" />
-        </svg>
-      </div>
-
-      <Leaf className="left-[2%] top-[22%] h-14 w-auto rotate-[25deg] opacity-50 blur-[3px]" fill="#5f9524" />
-      <Leaf className="bottom-[8%] left-[30%] h-10 w-auto -rotate-[35deg] opacity-40 blur-[3px]" fill="#5f9623" d="M10,90 C15,15 90,10 90,10 C85,85 10,90 10,90 Z" />
-      <Leaf className="left-[49%] top-[30%] z-10 h-6 w-auto -rotate-12 opacity-85 blur-[0.6px]" fill="#7bb532" d="M10,90 C15,15 90,10 90,10 C85,85 10,90 10,90 Z" />
-
-      <div className="absolute inset-x-0 top-0 z-30 flex items-center justify-between px-[var(--hero-gutter)] pt-6">
+    <div id="hero" data-testid="hero-card" className={`relative hidden bg-white lg:block ${GUTTER}`}>
+      <div className="relative z-30 flex items-center justify-between px-[var(--hero-gutter)] py-3">
         <Logo size="hero" />
         <NavPill size="hero" />
       </div>
 
-      <div className="uf-jakarta absolute inset-y-0 left-0 right-[min(60%,1330px)] z-20 flex items-center pb-4 pl-[var(--hero-gutter)] pr-8 pt-24">
-        <div className="max-w-[500px]">
-          <p className="text-[clamp(15px,1.4vw,20px)] font-extrabold uppercase tracking-[0.06em] text-[#436e26]">Beyond Fresh.</p>
-          <h1 className="mt-3 text-[clamp(30px,3vw,48px)] font-black uppercase leading-[1.06] tracking-tight text-[#132612]">
-            Global Fruit
-            <br />
-            Baskets,
-            <br />
-            Home Delivered.
-          </h1>
-          <p className="mt-5 max-w-[34ch] text-[clamp(14px,1.05vw,16px)] leading-[1.7] text-gray-600">
-            Experience the world's finest fruits, imported and export-quality, delivered daily to your doorstep.
-            Freshness redefined for urban living.
-          </p>
-          <div className="mt-8 flex flex-wrap items-center gap-3">
-            <Link to="/fruits" data-testid="hero-shop-now" className={`${btnSolid} px-7 py-3.5 text-[13px]`}>
-              Shop Now
-            </Link>
-            <Link to="/baskets" data-testid="hero-discover-baskets" className={`${btnOutline} px-6 py-3 text-[13px]`}>
-              Discover Our Baskets
-            </Link>
+      <div className="relative h-[clamp(480px,42vw,740px)] overflow-hidden">
+        <div className="absolute inset-y-0 right-0 w-[min(60%,1330px)]">
+          <HeroImage className="h-full w-full object-cover object-[65%_center]" />
+
+          <svg aria-hidden="true" viewBox="0 0 100 100" preserveAspectRatio="none" className="pointer-events-none absolute inset-0 h-full w-full">
+            <path fill="#7ca43b" d="M 7 0 C 13 8, 20 16, 19 27 C 18 40, 5 48, 3 62 C 2 74, 2 88, 4 100 L 6.6 100 C 4.6 88, 4.6 74, 5.8 62 C 7.8 48, 21.6 40, 22.6 27 C 23.6 16, 16.6 8, 10.6 0 Z" />
+            <path fill="#436f27" d="M 7 0 C 13 8, 20 16, 19 27 C 18 40, 5 48, 3 62 C 2 74, 2 88, 4 100 L 5.2 100 C 3.2 88, 3.2 74, 4.4 62 C 6.4 48, 19.8 40, 20.8 27 C 21.8 16, 14.8 8, 8.8 0 Z" />
+            <path fill="#ffffff" d="M 0 0 L 7.2 0 C 13.2 8, 20.2 16, 19.2 27 C 18.2 40, 5.2 48, 3.2 62 C 2.2 74, 2.2 88, 4.2 100 L 0 100 Z" />
+          </svg>
+        </div>
+
+        <Leaf className="left-[2%] top-[22%] h-14 w-auto rotate-[25deg] opacity-50 blur-[3px]" fill="#5f9524" />
+        <Leaf className="bottom-[8%] left-[30%] h-10 w-auto -rotate-[35deg] opacity-40 blur-[3px]" fill="#5f9623" d="M10,90 C15,15 90,10 90,10 C85,85 10,90 10,90 Z" />
+        <Leaf className="left-[49%] top-[30%] z-10 h-6 w-auto -rotate-12 opacity-85 blur-[0.6px]" fill="#7bb532" d="M10,90 C15,15 90,10 90,10 C85,85 10,90 10,90 Z" />
+
+        <div className="uf-jakarta absolute inset-y-0 left-0 right-[min(60%,1330px)] z-20 flex items-center py-6 pl-[var(--hero-gutter)] pr-8">
+          <div className="max-w-[500px]">
+            <p className="text-[clamp(15px,1.4vw,20px)] font-extrabold uppercase tracking-[0.06em] text-[#436e26]">Beyond Fresh.</p>
+            <h1 className="mt-3 text-[clamp(30px,3vw,48px)] font-black uppercase leading-[1.06] tracking-tight text-[#132612]">
+              Global Fruit
+              <br />
+              Baskets,
+              <br />
+              Home Delivered.
+            </h1>
+            <p className="mt-5 max-w-[34ch] text-[clamp(14px,1.05vw,16px)] leading-[1.7] text-gray-600">
+              Experience the world's finest fruits, imported and export-quality, delivered daily to your doorstep.
+              Freshness redefined for urban living.
+            </p>
+            <div className="mt-8 flex flex-wrap items-center gap-3">
+              <Link to="/fruits" data-testid="hero-shop-now" className={`${btnSolid} px-7 py-3.5 text-[13px]`}>
+                Shop Now
+              </Link>
+              <Link to="/baskets" data-testid="hero-discover-baskets" className={`${btnOutline} px-6 py-3 text-[13px]`}>
+                Discover Our Baskets
+              </Link>
+            </div>
           </div>
         </div>
       </div>

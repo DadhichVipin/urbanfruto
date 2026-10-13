@@ -30,16 +30,16 @@ export default function AdminLogin() {
   return (
     <div data-testid="admin-login-page" className="grid min-h-screen place-items-center bg-[#0f3d23] px-4">
       <div className="w-full max-w-[400px]">
-        <div className="mb-6 flex justify-center rounded-2xl bg-[#f3fbee] p-4">
+        <div className="mb-6 flex justify-center rounded-2xl bg-[#ffffff] p-4">
           <Logo />
         </div>
-        <form onSubmit={submit} className="rounded-2xl bg-[#f3fbee] p-6">
+        <form onSubmit={submit} className="rounded-2xl bg-[#ffffff] p-6">
           <h1 className="uf-display text-2xl font-bold text-[#0f3d23]">Admin Console</h1>
           <p className="mt-1.5 text-[12.5px] text-[#6d8a63]">Manage inventory, enquiries and customers.</p>
 
           <label className="mt-6 block">
             <span className="text-[11.5px] font-semibold text-[#436a51]">Email</span>
-            <span className="mt-1.5 flex items-center gap-2 rounded-xl border border-[#cfe3c6] bg-white px-3.5 py-2.5">
+            <span className="mt-1.5 flex items-center gap-2 rounded-xl border border-[#e2e4e8] bg-white px-3.5 py-2.5">
               <Mail className="h-4 w-4 text-[#7e9b74]" />
               <input
                 data-testid="admin-email-input"
@@ -55,7 +55,7 @@ export default function AdminLogin() {
 
           <label className="mt-4 block">
             <span className="text-[11.5px] font-semibold text-[#436a51]">Password</span>
-            <span className="mt-1.5 flex items-center gap-2 rounded-xl border border-[#cfe3c6] bg-white px-3.5 py-2.5">
+            <span className="mt-1.5 flex items-center gap-2 rounded-xl border border-[#e2e4e8] bg-white px-3.5 py-2.5">
               <Lock className="h-4 w-4 text-[#7e9b74]" />
               <input
                 data-testid="admin-password-input"

@@ -15,7 +15,7 @@ export default function Footer() {
     <footer data-testid="site-footer" className="bg-[#0f3d23] text-[#cfe6c4]">
       <div className="uf-shell grid gap-10 py-14 md:grid-cols-[1.2fr_1fr_auto] md:gap-14">
         <div>
-          <span className="inline-block rounded-2xl bg-[#f3fbee] p-3">
+          <span className="inline-block rounded-2xl bg-[#ffffff] p-3">
             <img src={LOGO.full} alt={BRAND_NAME} className="h-24 w-auto" />
           </span>
           <p className="mt-3 max-w-sm text-sm leading-relaxed text-[#a8c99c]">

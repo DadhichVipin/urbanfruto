@@ -44,7 +44,7 @@ export default function Checkout() {
   if (done)
     return (
       <div data-testid="checkout-success" className="uf-shell py-20 text-center">
-        <span className="mx-auto grid h-16 w-16 place-items-center rounded-full bg-[#ddefd4]">
+        <span className="mx-auto grid h-16 w-16 place-items-center rounded-full bg-[#eef0f2]">
           <Check className="h-7 w-7 text-[#2f7a46]" />
         </span>
         <h1 className="uf-display mt-6 text-3xl font-bold text-[#0f3d23]">Enquiry Received</h1>
@@ -89,7 +89,7 @@ export default function Checkout() {
                   value={form[f.k]}
                   onChange={set(f.k)}
                   placeholder={f.ph}
-                  className="mt-1.5 w-full rounded-xl border border-[#cfe3c6] bg-white px-3.5 py-2.5 text-sm outline-none transition-colors focus:border-[#0f3d23]"
+                  className="mt-1.5 w-full rounded-xl border border-[#e2e4e8] bg-white px-3.5 py-2.5 text-sm outline-none transition-colors focus:border-[#0f3d23]"
                 />
               </label>
             ))}
@@ -100,7 +100,7 @@ export default function Checkout() {
                 data-testid="checkout-city"
                 value={form.city}
                 onChange={set("city")}
-                className="mt-1.5 w-full rounded-xl border border-[#cfe3c6] bg-white px-3.5 py-2.5 text-sm outline-none focus:border-[#0f3d23]"
+                className="mt-1.5 w-full rounded-xl border border-[#e2e4e8] bg-white px-3.5 py-2.5 text-sm outline-none focus:border-[#0f3d23]"
               >
                 {CITIES.map((c) => (
                   <option key={c} value={c}>{c}</option>
@@ -115,7 +115,7 @@ export default function Checkout() {
                 type="date"
                 value={form.delivery_date}
                 onChange={set("delivery_date")}
-                className="mt-1.5 w-full rounded-xl border border-[#cfe3c6] bg-white px-3.5 py-2.5 text-sm outline-none focus:border-[#0f3d23]"
+                className="mt-1.5 w-full rounded-xl border border-[#e2e4e8] bg-white px-3.5 py-2.5 text-sm outline-none focus:border-[#0f3d23]"
               />
             </label>
 
@@ -127,7 +127,7 @@ export default function Checkout() {
                 value={form.address}
                 onChange={set("address")}
                 placeholder="Flat, building, street, landmark"
-                className="mt-1.5 w-full rounded-xl border border-[#cfe3c6] bg-white px-3.5 py-2.5 text-sm outline-none focus:border-[#0f3d23]"
+                className="mt-1.5 w-full rounded-xl border border-[#e2e4e8] bg-white px-3.5 py-2.5 text-sm outline-none focus:border-[#0f3d23]"
               />
             </label>
 
@@ -139,7 +139,7 @@ export default function Checkout() {
                 value={form.message}
                 onChange={set("message")}
                 placeholder="Handwritten card text, allergen swaps, fruit preferences..."
-                className="mt-1.5 w-full rounded-xl border border-[#cfe3c6] bg-white px-3.5 py-2.5 text-sm outline-none focus:border-[#0f3d23]"
+                className="mt-1.5 w-full rounded-xl border border-[#e2e4e8] bg-white px-3.5 py-2.5 text-sm outline-none focus:border-[#0f3d23]"
               />
             </label>
           </div>
@@ -163,13 +163,13 @@ export default function Checkout() {
             ) : (
               <ul className="mt-4 grid gap-3">
                 {items.map((i) => (
-                  <li key={`${i.item_id}-${i.meta}`} data-testid={`checkout-item-${i.item_id}`} className="flex gap-3 border-b border-dashed border-[#d8e8d0] pb-3 last:border-0">
+                  <li key={`${i.item_id}-${i.meta}`} data-testid={`checkout-item-${i.item_id}`} className="flex gap-3 border-b border-dashed border-[#e7e9ec] pb-3 last:border-0">
                     {i.image && <img src={i.image} alt={i.name} className="h-14 w-14 shrink-0 rounded-xl object-cover" />}
                     <div className="min-w-0 flex-1">
                       <p className="truncate text-[13px] font-semibold text-[#0f3d23]">{i.name}</p>
                       <p className="text-[10.5px] text-[#6d8a63]">{i.meta || i.kind}</p>
                       <div className="mt-1.5 flex items-center gap-2.5">
-                        <span className="flex items-center gap-2 rounded-full border border-[#cfe3c6] bg-white px-2 py-0.5">
+                        <span className="flex items-center gap-2 rounded-full border border-[#e2e4e8] bg-white px-2 py-0.5">
                           <button onClick={() => setQty(i.item_id, i.meta, i.qty - 1)}><Minus className="h-3 w-3" /></button>
                           <b className="w-3 text-center text-[11px]">{i.qty}</b>
                           <button onClick={() => setQty(i.item_id, i.meta, i.qty + 1)}><Plus className="h-3 w-3" /></button>
@@ -185,17 +185,17 @@ export default function Checkout() {
               </ul>
             )}
 
-            <dl className="mt-5 grid gap-2 border-t border-[#d8e8d0] pt-4 text-[12px]">
+            <dl className="mt-5 grid gap-2 border-t border-[#e7e9ec] pt-4 text-[12px]">
               <div className="flex justify-between"><dt className="text-[#6d8a63]">Subtotal</dt><dd className="font-semibold">{inr(total)}</dd></div>
               <div className="flex justify-between"><dt className="text-[#6d8a63]">Cold-Chain Express Delivery</dt><dd className="font-semibold text-[#2f7a46]">FREE</dd></div>
               <div className="flex justify-between"><dt className="text-[#6d8a63]">Heirloom Wicker Packing</dt><dd className="font-semibold text-[#2f7a46]">Complimentary</dd></div>
-              <div className="mt-1 flex items-baseline justify-between border-t border-[#d8e8d0] pt-3">
+              <div className="mt-1 flex items-baseline justify-between border-t border-[#e7e9ec] pt-3">
                 <dt className="uf-display text-base font-bold">Total</dt>
                 <dd data-testid="checkout-total" className="uf-display text-2xl font-black text-[#e4601f]">{inr(total)}</dd>
               </div>
             </dl>
 
-            <p className="mt-4 flex items-center gap-2 rounded-xl bg-[#eef8e8] p-3 text-[11px] text-[#436a51]">
+            <p className="mt-4 flex items-center gap-2 rounded-xl bg-[#f5f6f7] p-3 text-[11px] text-[#436a51]">
               <Truck className="h-4 w-4 shrink-0 text-[#2f7a46]" />
               Dispatched within 180 minutes of confirmation under 4°C transit.
             </p>

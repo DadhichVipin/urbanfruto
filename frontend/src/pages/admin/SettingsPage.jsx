@@ -3,7 +3,7 @@ import { Save, Send } from "lucide-react";
 import { api } from "@/lib/api";
 import { toast } from "sonner";
 
-const inputCls = "mt-1.5 w-full rounded-xl border border-[#cfe3c6] bg-white px-3.5 py-2.5 text-sm outline-none focus:border-[#0f3d23]";
+const inputCls = "mt-1.5 w-full rounded-xl border border-[#e2e4e8] bg-white px-3.5 py-2.5 text-sm outline-none focus:border-[#0f3d23]";
 
 export default function SettingsPage() {
   const [s, setS] = useState(null);

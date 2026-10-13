@@ -34,11 +34,11 @@ export default function AdminLayout() {
   };
 
   return (
-    <div data-testid="admin-layout" className="min-h-screen bg-[#eaf6e4] lg:flex">
+    <div data-testid="admin-layout" className="min-h-screen bg-[#f7f7f8] lg:flex">
       <aside className="shrink-0 bg-[#0f3d23] lg:w-[246px]">
         <div className="flex items-center justify-between px-5 py-4">
           <Link to="/admin" className="flex items-center gap-2.5 uf-display text-lg font-bold text-[#f3fbee]">
-            <span className="grid h-9 w-9 place-items-center rounded-full bg-[#f3fbee]">
+            <span className="grid h-9 w-9 place-items-center rounded-full bg-[#ffffff]">
               <img src={LOGO.mark} alt="" className="h-6 w-auto" />
             </span>
             {BRAND_NAME} <span className="text-[#e4601f]">·</span> Admin

@@ -22,7 +22,7 @@ const Field = ({ label, children }) => (
   </label>
 );
 
-const inputCls = "mt-1 w-full rounded-lg border border-[#cfe3c6] bg-white px-3 py-2 text-[13px] outline-none focus:border-[#0f3d23]";
+const inputCls = "mt-1 w-full rounded-lg border border-[#e2e4e8] bg-white px-3 py-2 text-[13px] outline-none focus:border-[#0f3d23]";
 
 export default function Inventory() {
   const [tab, setTab] = useState("hampers");
@@ -98,7 +98,7 @@ export default function Inventory() {
             data-testid={`inventory-tab-${t}`}
             onClick={() => { setTab(t); setEditing(null); }}
             className={`rounded-full px-4 py-2 text-[12.5px] font-semibold capitalize ${
-              tab === t ? "bg-[#0f3d23] text-[#f3fbee]" : "border border-[#cfe3c6] bg-white text-[#436a51]"
+              tab === t ? "bg-[#0f3d23] text-[#f3fbee]" : "border border-[#e2e4e8] bg-white text-[#436a51]"
             }`}
           >
             {t} ({t === "hampers" ? hampers.length : fruits.length})
@@ -116,7 +116,7 @@ export default function Inventory() {
           </thead>
           <tbody>
             {rows.map((r) => (
-              <tr key={r.id} data-testid={`inventory-row-${r.slug}`} className="border-t border-[#e4efdd]">
+              <tr key={r.id} data-testid={`inventory-row-${r.slug}`} className="border-t border-[#eef0f2]">
                 <td className="py-2.5">
                   <span className="flex items-center gap-2.5">
                     {r.image && <img src={r.image} alt={r.name} className="h-9 w-9 rounded-lg object-cover" />}
@@ -137,7 +137,7 @@ export default function Inventory() {
                     <button
                       data-testid={`inventory-edit-${r.slug}`}
                       onClick={() => setEditing({ ...r, contents: (r.contents || []).join("\n"), tags: (r.tags || []).join(", ") })}
-                      className="grid h-8 w-8 place-items-center rounded-lg border border-[#cfe3c6] bg-white"
+                      className="grid h-8 w-8 place-items-center rounded-lg border border-[#e2e4e8] bg-white"
                     >
                       <Pencil className="h-3.5 w-3.5" />
                     </button>
@@ -161,7 +161,7 @@ export default function Inventory() {
 
       {editing && (
         <div className="fixed inset-0 z-50 flex items-start justify-center overflow-y-auto bg-[#0f3d23]/50 p-4 backdrop-blur-sm" data-testid="inventory-modal">
-          <form onSubmit={save} className="my-8 w-full max-w-[640px] rounded-2xl bg-[#f3fbee] p-5">
+          <form onSubmit={save} className="my-8 w-full max-w-[640px] rounded-2xl bg-[#ffffff] p-5">
             <div className="flex items-center justify-between">
               <h2 className="uf-display text-xl font-bold">
                 {editing.id ? "Edit" : "New"} {tab === "hampers" ? "Hamper" : "Fruit"}

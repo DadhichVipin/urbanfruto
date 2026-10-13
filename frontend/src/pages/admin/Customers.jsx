@@ -30,7 +30,7 @@ export default function Customers() {
         Captured automatically from storefront enquiries — {rows.length} total.
       </p>
 
-      <div className="mt-5 flex max-w-[380px] items-center gap-2 rounded-xl border border-[#cfe3c6] bg-white px-3.5 py-2.5">
+      <div className="mt-5 flex max-w-[380px] items-center gap-2 rounded-xl border border-[#e2e4e8] bg-white px-3.5 py-2.5">
         <Search className="h-4 w-4 text-[#7e9b74]" />
         <input
           data-testid="customers-search"
@@ -52,7 +52,7 @@ export default function Customers() {
           </thead>
           <tbody>
             {shown.map((c) => (
-              <tr key={c.id} data-testid={`customer-row-${c.phone}`} className="border-t border-[#e4efdd]">
+              <tr key={c.id} data-testid={`customer-row-${c.phone}`} className="border-t border-[#eef0f2]">
                 <td className="py-2.5">
                   <b className="block text-[13px] text-[#0f3d23]">{c.name}</b>
                   <span className="text-[10.5px] text-[#6d8a63]">Since {new Date(c.created_at).toLocaleDateString("en-IN")}</span>
@@ -67,7 +67,7 @@ export default function Customers() {
                     data-testid={`customer-toggle-${c.phone}`}
                     onClick={() => toggle(c.id)}
                     className={`inline-flex items-center gap-1.5 rounded-lg px-2.5 py-1.5 text-[11px] font-bold ${
-                      c.blocked ? "bg-[#ffe0e0] text-[#a33]" : "bg-[#ddefd4] text-[#2f7a46]"
+                      c.blocked ? "bg-[#ffe0e0] text-[#a33]" : "bg-[#eef0f2] text-[#2f7a46]"
                     }`}
                   >
                     {c.blocked ? <><Ban className="h-3.5 w-3.5" /> Blocked</> : <><CheckCircle2 className="h-3.5 w-3.5" /> Active</>}

@@ -58,12 +58,12 @@ export default function Header() {
         <span className="ml-auto shrink-0 rounded bg-[#e4601f] px-1.5 py-0.5 text-[9px] text-white">LIVE</span>
       </div>
 
-      <header className="border-b border-[#d8e8d0] bg-[#f3fbee]/95 backdrop-blur-xl">
+      <header className="border-b border-[#e7e9ec] bg-[#ffffff]/95 backdrop-blur-xl">
         <div className="uf-shell flex items-center gap-4 py-3">
           <button
             data-testid="mobile-nav-toggle"
             onClick={() => setMobileNav((v) => !v)}
-            className="grid h-9 w-9 place-items-center rounded-lg border border-[#cfe3c6] bg-white md:hidden"
+            className="grid h-9 w-9 place-items-center rounded-lg border border-[#e2e4e8] bg-white md:hidden"
             aria-label="Menu"
           >
             {mobileNav ? <X className="h-4 w-4" /> : <Menu className="h-4 w-4" />}
@@ -80,7 +80,7 @@ export default function Header() {
                   to={n.to}
                   data-testid={`nav-${n.label.toLowerCase().replace(/\s/g, "-")}`}
                   className={`whitespace-nowrap rounded-full px-2.5 py-2 text-[13px] font-medium transition-colors lg:px-3.5 lg:text-sm ${
-                    active ? "bg-[#ddefd4] text-[#0f3d23]" : "text-[#2c5c3f] hover:bg-[#e6f4de]"
+                    active ? "bg-[#eef0f2] text-[#0f3d23]" : "text-[#2c5c3f] hover:bg-[#f1f2f4]"
                   }`}
                 >
                   {n.label}
@@ -89,7 +89,7 @@ export default function Header() {
             })}
           </nav>
 
-          <form onSubmit={submit} className="ml-auto flex min-w-0 flex-1 max-w-[320px] items-center gap-2 rounded-full border border-[#cfe3c6] bg-white px-3 py-2 md:px-4 md:py-2.5">
+          <form onSubmit={submit} className="ml-auto flex min-w-0 flex-1 max-w-[320px] items-center gap-2 rounded-full border border-[#e2e4e8] bg-white px-3 py-2 md:px-4 md:py-2.5">
             <Search className="h-4 w-4 shrink-0 text-[#7e9b74]" />
             <input
               data-testid="header-search-input"
@@ -103,7 +103,7 @@ export default function Header() {
           <button
             data-testid="cart-button"
             onClick={() => setOpen(true)}
-            className="relative ml-auto grid h-10 w-10 shrink-0 place-items-center rounded-full border border-[#cfe3c6] bg-white md:ml-2"
+            className="relative ml-auto grid h-10 w-10 shrink-0 place-items-center rounded-full border border-[#e2e4e8] bg-white md:ml-2"
             aria-label="Cart"
           >
             <ShoppingBag className="h-4.5 w-4.5 text-[#0f3d23]" />
@@ -122,9 +122,9 @@ export default function Header() {
         </div>
 
         {mobileNav && (
-          <nav data-testid="mobile-nav-panel" className="uf-shell grid gap-1 border-t border-[#d8e8d0] py-3 md:hidden">
+          <nav data-testid="mobile-nav-panel" className="uf-shell grid gap-1 border-t border-[#e7e9ec] py-3 md:hidden">
             {NAV.map((n) => (
-              <Link key={n.label} to={n.to} className="rounded-lg px-3 py-2.5 text-sm font-medium hover:bg-[#e6f4de]">
+              <Link key={n.label} to={n.to} className="rounded-lg px-3 py-2.5 text-sm font-medium hover:bg-[#f1f2f4]">
                 {n.label}
               </Link>
             ))}

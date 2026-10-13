@@ -73,7 +73,7 @@ export default function FruitDetail() {
   ];
 
   return (
-    <div data-testid="fruit-detail-page" className="bg-[#eaf6e4] pb-28 lg:pb-16">
+    <div data-testid="fruit-detail-page" className="bg-[#f7f7f8] pb-28 lg:pb-16">
       <div className="uf-shell pt-6">
         <div className="grid grid-cols-1 gap-8 lg:grid-cols-[1fr_1.05fr_236px] lg:gap-8">
           {/* LEFT: info */}
@@ -97,20 +97,20 @@ export default function FruitDetail() {
                   <span className="uf-chip !px-2.5 !py-1 !text-[10.5px] !bg-[#ffe6d6] !border-[#ffd0b3] !text-[#c04d13]">
                     <FlaskConical className="h-3 w-3" /> Brix {active.brix}
                   </span>
-                  <span className="uf-chip !px-2.5 !py-1 !text-[10.5px] !bg-[#ddefd4] !border-[#c7e3ba]">
+                  <span className="uf-chip !px-2.5 !py-1 !text-[10.5px] !bg-[#eef0f2] !border-[#dcdfe4]">
                     <Zap className="h-3 w-3 text-[#2f7a46]" /> Free 3-Hr
                   </span>
                 </div>
               </div>
 
-              <div className="mt-3 flex gap-1.5 rounded-xl border border-[#cfe3c6] bg-white p-1">
+              <div className="mt-3 flex gap-1.5 rounded-xl border border-[#e2e4e8] bg-white p-1">
                 {variants.map((v) => (
                   <button
                     key={v.n}
                     data-testid={`fruit-variant-${v.n}`}
                     onClick={() => setVariant(v.n)}
                     className={`flex-1 rounded-lg px-2 py-1.5 text-center transition-colors ${
-                      variant === v.n ? "bg-[#0f3d23] text-[#f3fbee]" : "text-[#436a51] hover:bg-[#eef8e8]"
+                      variant === v.n ? "bg-[#0f3d23] text-[#f3fbee]" : "text-[#436a51] hover:bg-[#f5f6f7]"
                     }`}
                   >
                     <b className="block whitespace-nowrap text-[11.5px] font-bold">{v.label}</b>
@@ -148,7 +148,7 @@ export default function FruitDetail() {
 
           {/* CENTER: image + tabs */}
           <div className="min-w-0">
-            <div className="relative overflow-hidden rounded-2xl border border-[#d8e8d0] bg-[#fcfdf8] p-3">
+            <div className="relative overflow-hidden rounded-2xl border border-[#e7e9ec] bg-[#ffffff] p-3">
               <img
                 data-testid="fruit-hero-image"
                 src={active.image}
@@ -169,7 +169,7 @@ export default function FruitDetail() {
               </span>
             </div>
 
-            <div className="mt-4 flex flex-wrap gap-1.5 rounded-xl border border-[#cfe3c6] bg-white p-1.5">
+            <div className="mt-4 flex flex-wrap gap-1.5 rounded-xl border border-[#e2e4e8] bg-white p-1.5">
               {[
                 { id: "fruit", label: "Fruit View" },
                 { id: "nutrition", label: "Nutrition Breakdown" },
@@ -180,7 +180,7 @@ export default function FruitDetail() {
                   data-testid={`fruit-tab-${t.id}`}
                   onClick={() => setTab(t.id)}
                   className={`flex-1 whitespace-nowrap rounded-lg px-3 py-2 text-[11.5px] font-semibold transition-colors ${
-                    tab === t.id ? "bg-[#0f3d23] text-[#f3fbee]" : "text-[#436a51] hover:bg-[#eef8e8]"
+                    tab === t.id ? "bg-[#0f3d23] text-[#f3fbee]" : "text-[#436a51] hover:bg-[#f5f6f7]"
                   }`}
                 >
                   {t.label}
@@ -191,7 +191,7 @@ export default function FruitDetail() {
             {tab === "nutrition" && (
               <div data-testid="fruit-nutrition-panel" className="uf-card mt-3 grid grid-cols-2 gap-3 p-4 sm:grid-cols-4">
                 {active.nutrition.map((n) => (
-                  <div key={n.label} className="rounded-xl bg-[#eef8e8] p-3 text-center">
+                  <div key={n.label} className="rounded-xl bg-[#f5f6f7] p-3 text-center">
                     <b className="uf-display block text-base font-bold text-[#0f3d23]">{n.value}</b>
                     <span className="text-[10px] text-[#6d8a63]">{n.label}</span>
                   </div>
@@ -214,8 +214,8 @@ export default function FruitDetail() {
 
           {/* HARVEST SHELF — side nav */}
           <aside className="uf-card min-w-0 p-4 lg:sticky lg:top-32 lg:max-h-[calc(100vh-9rem)] lg:self-start lg:overflow-y-auto">
-            <div className="flex items-center gap-3 border-b border-[#d8e8d0] pb-3">
-              <span className="grid h-10 w-10 shrink-0 place-items-center rounded-full bg-[#eef8e8]">
+            <div className="flex items-center gap-3 border-b border-[#e7e9ec] pb-3">
+              <span className="grid h-10 w-10 shrink-0 place-items-center rounded-full bg-[#f5f6f7]">
                 <Droplet className="h-4 w-4 text-[#2f7a46]" />
               </span>
               <span>
@@ -233,7 +233,7 @@ export default function FruitDetail() {
                     key={f.id}
                     data-testid={`shelf-item-${f.slug}`}
                     className={`w-[180px] shrink-0 rounded-xl border p-2.5 transition-all lg:w-full ${
-                      selected ? "border-[#0f3d23] bg-[#eef8e8]" : "border-[#d8e8d0] bg-white hover:border-[#cfe3c6] hover:bg-[#f7fcf4]"
+                      selected ? "border-[#0f3d23] bg-[#f5f6f7]" : "border-[#e7e9ec] bg-white hover:border-[#e2e4e8] hover:bg-[#fafafa]"
                     }`}
                   >
                     <Link to={`/fruits/${f.slug}`} className="flex items-center gap-2.5">
@@ -248,7 +248,7 @@ export default function FruitDetail() {
                       data-testid={`shelf-add-${f.slug}`}
                       onClick={() => addFruit(f, 1)}
                       className={`mt-2 w-full rounded-lg py-1.5 text-[11px] font-bold transition-colors ${
-                        selected ? "bg-[#0f3d23] text-[#f3fbee]" : "border border-[#cfe3c6] text-[#0f3d23] hover:bg-[#eef8e8]"
+                        selected ? "bg-[#0f3d23] text-[#f3fbee]" : "border border-[#e2e4e8] text-[#0f3d23] hover:bg-[#f5f6f7]"
                       }`}
                     >
                       {selected ? "Selected · Add" : "+ Add"}
@@ -279,7 +279,7 @@ export default function FruitDetail() {
       </div>
 
       {/* MOBILE STICKY */}
-      <div className="fixed bottom-0 left-0 right-0 z-30 flex items-center gap-3 border-t border-[#d8e8d0] bg-[#fcfdf8] px-4 py-3 lg:hidden">
+      <div className="fixed bottom-0 left-0 right-0 z-30 flex items-center gap-3 border-t border-[#e7e9ec] bg-[#ffffff] px-4 py-3 lg:hidden">
         <div className="leading-tight">
           <span className="block text-[9.5px] font-semibold uppercase text-[#6d8a63]">
             Bucket total ({count} items)

@@ -10,10 +10,10 @@ export default function CartDrawer() {
   return (
     <div className="fixed inset-0 z-50 flex justify-end" data-testid="cart-drawer">
       <div className="absolute inset-0 bg-[#0f3d23]/50 backdrop-blur-sm" onClick={() => setOpen(false)} />
-      <aside className="relative flex h-full w-full max-w-[420px] flex-col bg-[#f3fbee] shadow-2xl">
-        <div className="flex items-center justify-between border-b border-[#d8e8d0] px-5 py-4">
+      <aside className="relative flex h-full w-full max-w-[420px] flex-col bg-[#ffffff] shadow-2xl">
+        <div className="flex items-center justify-between border-b border-[#e7e9ec] px-5 py-4">
           <h3 className="uf-display text-lg font-bold">Your Fruit Bucket</h3>
-          <button data-testid="cart-close-btn" onClick={() => setOpen(false)} className="grid h-9 w-9 place-items-center rounded-full border border-[#cfe3c6] bg-white">
+          <button data-testid="cart-close-btn" onClick={() => setOpen(false)} className="grid h-9 w-9 place-items-center rounded-full border border-[#e2e4e8] bg-white">
             <X className="h-4 w-4" />
           </button>
         </div>
@@ -36,7 +36,7 @@ export default function CartDrawer() {
                     <p className="truncate text-sm font-semibold">{i.name}</p>
                     <p className="text-xs text-[#6d8a63]">{i.meta || i.kind}</p>
                     <div className="mt-2 flex items-center gap-3">
-                      <div className="flex items-center gap-2 rounded-full border border-[#cfe3c6] bg-white px-2 py-1">
+                      <div className="flex items-center gap-2 rounded-full border border-[#e2e4e8] bg-white px-2 py-1">
                         <button data-testid={`cart-dec-${i.item_id}`} onClick={() => setQty(i.item_id, i.meta, i.qty - 1)}>
                           <Minus className="h-3.5 w-3.5" />
                         </button>
@@ -58,7 +58,7 @@ export default function CartDrawer() {
         </div>
 
         {items.length > 0 && (
-          <div className="border-t border-[#d8e8d0] bg-white px-5 py-4">
+          <div className="border-t border-[#e7e9ec] bg-white px-5 py-4">
             <div className="flex items-baseline justify-between">
               <span className="text-sm text-[#55785f]">Bucket Total</span>
               <span data-testid="cart-total" className="uf-display text-2xl font-bold text-[#e4601f]">{inr(total)}</span>

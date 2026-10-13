@@ -52,7 +52,7 @@ export default function Home() {
   return (
     <div data-testid="home-page">
       {/* HERO */}
-      <section className="relative overflow-hidden bg-[#eaf6e4] uf-noise">
+      <section className="relative overflow-hidden bg-[#f7f7f8] uf-noise">
         <div className="uf-shell relative grid items-center gap-10 py-12 lg:grid-cols-[1.05fr_1fr_136px] lg:gap-8 lg:py-20">
           <div className="uf-rise">
             <p className="uf-eyebrow flex items-center gap-3 text-[#4d7a5c]">
@@ -95,7 +95,7 @@ export default function Home() {
             <span className="uf-chip absolute -top-3 left-1/2 z-10 -translate-x-1/2 shadow-sm">
               <Leaf className="h-3.5 w-3.5 text-[#2f7a46]" /> 100% Organic Origin
             </span>
-            <div className="rounded-[28px] border border-[#d8e8d0] bg-[#fcfdf8] p-3 shadow-[0_24px_60px_-28px_rgba(15,61,35,0.4)] sm:p-4">
+            <div className="rounded-[28px] border border-[#e7e9ec] bg-[#ffffff] p-3 shadow-[0_24px_60px_-28px_rgba(15,61,35,0.4)] sm:p-4">
               <div className="relative overflow-hidden rounded-[20px]">
                 <img
                   src={hero?.image || media("catalog/royal.jpg")}
@@ -134,7 +134,7 @@ export default function Home() {
                 { icon: Droplet, t: "Zero", s: "Preservatives" },
               ].map(({ icon: Icon, t, s }) => (
                 <div key={t} className="uf-card flex items-center gap-2 p-2.5 lg:w-[132px] lg:flex-col lg:text-center">
-                  <span className="grid h-7 w-7 shrink-0 place-items-center rounded-full bg-[#e9f6e3]">
+                  <span className="grid h-7 w-7 shrink-0 place-items-center rounded-full bg-[#f1f2f4]">
                     <Icon className="h-3.5 w-3.5 text-[#2f7a46]" />
                   </span>
                   <span className="leading-tight">
@@ -166,17 +166,17 @@ export default function Home() {
                   <img
                     src={c.image}
                     alt={c.label}
-                    className="h-12 w-12 rounded-full border-2 border-[#d8e8d0] object-cover transition-all duration-300 group-hover:border-[#e4601f]"
+                    className="h-12 w-12 rounded-full border-2 border-[#e7e9ec] object-cover transition-all duration-300 group-hover:border-[#e4601f]"
                   />
                   <span className="text-[10px] font-medium leading-tight text-[#436a51]">{c.label}</span>
                 </Link>
               ))}
             </div>
             <div className="hidden shrink-0 gap-2 sm:flex">
-              <button data-testid="curation-prev" onClick={() => scrollRail(-1)} className="grid h-8 w-8 place-items-center rounded-full border border-[#cfe3c6] bg-white">
+              <button data-testid="curation-prev" onClick={() => scrollRail(-1)} className="grid h-8 w-8 place-items-center rounded-full border border-[#e2e4e8] bg-white">
                 <ChevronLeft className="h-4 w-4" />
               </button>
-              <button data-testid="curation-next" onClick={() => scrollRail(1)} className="grid h-8 w-8 place-items-center rounded-full border border-[#cfe3c6] bg-white">
+              <button data-testid="curation-next" onClick={() => scrollRail(1)} className="grid h-8 w-8 place-items-center rounded-full border border-[#e2e4e8] bg-white">
                 <ChevronRight className="h-4 w-4" />
               </button>
             </div>
@@ -185,7 +185,7 @@ export default function Home() {
       </section>
 
       {/* PROMISE STRIP */}
-      <section className="border-y border-[#d8e8d0] bg-[#ddefd4]">
+      <section className="border-y border-[#e7e9ec] bg-[#eef0f2]">
         <div className="uf-shell grid grid-cols-2 gap-4 py-5 lg:grid-cols-4">
           {(content?.promises || []).map((p) => {
             const Icon = ICONS[p.icon] || Leaf;
@@ -203,7 +203,7 @@ export default function Home() {
       </section>
 
       {/* HAMPERS */}
-      <section id="hampers" className="bg-[#eaf6e4] py-16 lg:py-20">
+      <section id="hampers" className="bg-[#f7f7f8] py-16 lg:py-20">
         <div className="uf-shell">
           <div className="flex flex-col gap-6 lg:flex-row lg:items-end lg:justify-between">
             <div>
@@ -222,7 +222,7 @@ export default function Home() {
                   data-testid={`filter-${f.id}`}
                   onClick={() => setFilter(f.id)}
                   className={`shrink-0 rounded-full px-4 py-2 text-xs font-semibold transition-colors ${
-                    filter === f.id ? "bg-[#0f3d23] text-[#f3fbee]" : "border border-[#cfe3c6] bg-white text-[#436a51]"
+                    filter === f.id ? "bg-[#0f3d23] text-[#f3fbee]" : "border border-[#e2e4e8] bg-white text-[#436a51]"
                   }`}
                 >
                   {f.label}
@@ -250,7 +250,7 @@ export default function Home() {
       </section>
 
       {/* DIFFERENCE */}
-      <section className="bg-[#ddefd4] py-16 lg:py-20">
+      <section className="bg-[#eef0f2] py-16 lg:py-20">
         <div className="uf-shell text-center">
           <p className="uf-eyebrow text-[#e4601f]">Unrivaled Quality Standard</p>
           <h2 className="uf-display mx-auto mt-3 max-w-2xl text-3xl font-bold text-[#0f3d23] sm:text-4xl">
@@ -265,7 +265,7 @@ export default function Home() {
               const Icon = ICONS[d.icon] || Leaf;
               return (
                 <div key={d.title} className="uf-card flex flex-col p-5 transition-transform duration-300 hover:-translate-y-1">
-                  <span className="grid h-10 w-10 place-items-center rounded-xl bg-[#e9f6e3]">
+                  <span className="grid h-10 w-10 place-items-center rounded-xl bg-[#f1f2f4]">
                     <Icon className="h-4.5 w-4.5 text-[#2f7a46]" />
                   </span>
                   <h3 className="mt-4 text-[15px] font-bold leading-snug text-[#0f3d23]">{d.title}</h3>
@@ -279,7 +279,7 @@ export default function Home() {
       </section>
 
       {/* CUSTOM BUILDER CTA */}
-      <section className="bg-[#eaf6e4] py-16 lg:py-20">
+      <section className="bg-[#f7f7f8] py-16 lg:py-20">
         <div className="uf-shell">
           <div className="relative overflow-hidden rounded-3xl bg-[#143f27] p-6 sm:p-10 lg:p-12 uf-noise">
             <div className="relative grid gap-8 lg:grid-cols-[1.1fr_1fr] lg:items-center">
@@ -310,7 +310,7 @@ export default function Home() {
                 </div>
               </div>
 
-              <div className="rounded-2xl bg-[#fcfdf8] p-4 shadow-2xl">
+              <div className="rounded-2xl bg-[#ffffff] p-4 shadow-2xl">
                 <div className="flex items-center justify-between">
                   <p className="text-[13px] font-bold text-[#0f3d23]">Live Hamper Configurator</p>
                   <span className="text-[10px] font-bold uppercase tracking-wide text-[#e4601f]">Live Preview</span>
@@ -321,7 +321,7 @@ export default function Home() {
                     ["Selected Fruits", "Mangosteen, Pitaya, Black Figs (3 total)"],
                     ["Ribbon & Lining", "Sage Green French Linen"],
                   ].map(([k, v]) => (
-                    <div key={k} className="flex justify-between gap-3 border-b border-dashed border-[#d8e8d0] pb-2">
+                    <div key={k} className="flex justify-between gap-3 border-b border-dashed border-[#e7e9ec] pb-2">
                       <dt className="text-[#6d8a63]">{k}</dt>
                       <dd className="text-right font-semibold text-[#0f3d23]">{v}</dd>
                     </div>
@@ -350,7 +350,7 @@ export default function Home() {
       </section>
 
       {/* TESTIMONIALS */}
-      <section className="bg-[#ddefd4] py-16 lg:py-20">
+      <section className="bg-[#eef0f2] py-16 lg:py-20">
         <div className="uf-shell text-center">
           <p className="uf-eyebrow text-[#e4601f]">Verified Expressions</p>
           <h2 className="uf-display mx-auto mt-3 max-w-xl text-3xl font-bold text-[#0f3d23] sm:text-4xl">
@@ -366,7 +366,7 @@ export default function Home() {
                 </div>
                 <p className="mt-4 flex-1 text-[12.5px] italic leading-relaxed text-[#436a51]">"{t.quote}"</p>
                 <footer className="mt-5 flex items-center gap-3">
-                  <span className="grid h-9 w-9 place-items-center rounded-full bg-[#ddefd4] text-[11px] font-bold text-[#0f3d23]">
+                  <span className="grid h-9 w-9 place-items-center rounded-full bg-[#eef0f2] text-[11px] font-bold text-[#0f3d23]">
                     {t.initials}
                   </span>
                   <span className="leading-tight">

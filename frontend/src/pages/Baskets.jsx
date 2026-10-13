@@ -60,7 +60,7 @@ export default function Baskets() {
   };
 
   return (
-    <div data-testid="baskets-page" className="bg-[#eaf6e4]">
+    <div data-testid="baskets-page" className="bg-[#f7f7f8]">
       <section className="uf-shell pt-10">
         <p className="uf-eyebrow text-[#6d8a63]">Signature Offerings</p>
         <h1 className="uf-display mt-3 text-3xl font-black leading-[1.05] text-[#0f3d23] sm:text-4xl lg:text-5xl">
@@ -79,7 +79,7 @@ export default function Baskets() {
                 data-testid={`filter-${f.id}`}
                 onClick={() => setFilter(f.id)}
                 className={`shrink-0 rounded-full px-4 py-2 text-xs font-semibold transition-colors ${
-                  filter === f.id ? "bg-[#0f3d23] text-[#f3fbee]" : "border border-[#cfe3c6] bg-white text-[#436a51]"
+                  filter === f.id ? "bg-[#0f3d23] text-[#f3fbee]" : "border border-[#e2e4e8] bg-white text-[#436a51]"
                 }`}
               >
                 {f.label}
@@ -87,7 +87,7 @@ export default function Baskets() {
             ))}
           </div>
 
-          <label className="flex shrink-0 items-center gap-2 rounded-full border border-[#cfe3c6] bg-white px-3.5 py-2">
+          <label className="flex shrink-0 items-center gap-2 rounded-full border border-[#e2e4e8] bg-white px-3.5 py-2">
             <ArrowUpDown className="h-3.5 w-3.5 shrink-0 text-[#7e9b74]" />
             <span className="whitespace-nowrap text-[11px] font-semibold text-[#6d8a63]">Sort by</span>
             <select
@@ -147,7 +147,7 @@ export default function Baskets() {
         </Link>
       </section>
 
-      <section className="mt-14 border-y border-[#d8e8d0] bg-[#ddefd4]">
+      <section className="mt-14 border-y border-[#e7e9ec] bg-[#eef0f2]">
         <div className="uf-shell grid grid-cols-2 gap-4 py-5 lg:grid-cols-4">
           {promises.map((p) => {
             const Icon = ICONS[p.icon] || Leaf;

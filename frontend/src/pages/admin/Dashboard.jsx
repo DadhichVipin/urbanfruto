@@ -5,7 +5,7 @@ import { api, inr } from "@/lib/api";
 
 const STATUS_COLORS = {
   new: "bg-[#ffe6d6] text-[#c04d13]",
-  contacted: "bg-[#ddefd4] text-[#2f7a46]",
+  contacted: "bg-[#eef0f2] text-[#2f7a46]",
   confirmed: "bg-[#d6e9ff] text-[#1a4f91]",
   delivered: "bg-[#e3e3ff] text-[#3b3b8f]",
   cancelled: "bg-[#ffe0e0] text-[#a33]",
@@ -71,7 +71,7 @@ export default function Dashboard() {
           <ul className="mt-4 grid gap-2.5">
             {stats.top_items.length === 0 && <li className="text-sm text-[#6d8a63]">No data yet.</li>}
             {stats.top_items.map((t) => (
-              <li key={t.name} className="flex items-center justify-between border-b border-dashed border-[#d8e8d0] pb-2 last:border-0">
+              <li key={t.name} className="flex items-center justify-between border-b border-dashed border-[#e7e9ec] pb-2 last:border-0">
                 <span className="truncate text-[12.5px] text-[#0f3d23]">{t.name}</span>
                 <b className="shrink-0 text-[12px] text-[#e4601f]">{t.qty} units</b>
               </li>
@@ -81,7 +81,7 @@ export default function Dashboard() {
           <h3 className="uf-display mt-6 text-base font-bold">By Status</h3>
           <div className="mt-2.5 flex flex-wrap gap-2">
             {Object.entries(stats.by_status).map(([k, v]) => (
-              <span key={k} className={`rounded-full px-2.5 py-1 text-[11px] font-bold capitalize ${STATUS_COLORS[k] || "bg-[#eef8e8]"}`}>
+              <span key={k} className={`rounded-full px-2.5 py-1 text-[11px] font-bold capitalize ${STATUS_COLORS[k] || "bg-[#f5f6f7]"}`}>
                 {k}: {v}
               </span>
             ))}
@@ -108,7 +108,7 @@ export default function Dashboard() {
                 <tr><td colSpan={5} className="py-6 text-center text-[#6d8a63]">No enquiries yet.</td></tr>
               )}
               {stats.latest.map((e) => (
-                <tr key={e.id} data-testid={`latest-enquiry-${e.ref}`} className="border-t border-[#e4efdd]">
+                <tr key={e.id} data-testid={`latest-enquiry-${e.ref}`} className="border-t border-[#eef0f2]">
                   <td className="py-2.5 font-bold text-[#0f3d23]">{e.ref}</td>
                   <td className="py-2.5">{e.name}<span className="block text-[10.5px] text-[#6d8a63]">{e.phone}</span></td>
                   <td className="py-2.5">{e.items?.length || 0}</td>

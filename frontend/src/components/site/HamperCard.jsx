@@ -5,8 +5,8 @@ import { inr } from "@/lib/api";
 export const HamperCard = ({ hamper: h, onAdd, onOrder }) => (
   <article
     data-testid={`hamper-card-${h.slug}`}
-    className={`relative flex min-w-0 flex-col rounded-2xl border bg-[#fcfdf8] p-4 transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_26px_50px_-30px_rgba(15,61,35,0.5)] ${
-      h.popular ? "border-[#e4601f]" : "border-[#d8e8d0]"
+    className={`relative flex min-w-0 flex-col rounded-2xl border bg-[#ffffff] p-4 transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_26px_50px_-30px_rgba(15,61,35,0.5)] ${
+      h.popular ? "border-[#e4601f]" : "border-[#e7e9ec]"
     }`}
   >
     {h.popular && (

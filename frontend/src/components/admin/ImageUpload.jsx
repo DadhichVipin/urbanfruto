@@ -44,7 +44,7 @@ function PickButton({ folder, onUploaded, multiple = false, testId, label }) {
         data-testid={testId}
         disabled={busy}
         onClick={() => input.current?.click()}
-        className="inline-flex items-center gap-1.5 rounded-lg border border-[#cfe3c6] bg-white px-3 py-2 text-[12px] font-semibold text-[#0f3d23] disabled:opacity-60"
+        className="inline-flex items-center gap-1.5 rounded-lg border border-[#e2e4e8] bg-white px-3 py-2 text-[12px] font-semibold text-[#0f3d23] disabled:opacity-60"
       >
         {busy ? <Loader2 className="h-3.5 w-3.5 animate-spin" /> : <ImagePlus className="h-3.5 w-3.5" />}
         {busy ? "Uploading…" : label}
@@ -57,9 +57,9 @@ export function ImageUpload({ value, onChange, folder }) {
   return (
     <div className="mt-1 flex items-center gap-3">
       {value ? (
-        <img src={value} alt="" className="h-14 w-14 rounded-lg border border-[#cfe3c6] object-cover" />
+        <img src={value} alt="" className="h-14 w-14 rounded-lg border border-[#e2e4e8] object-cover" />
       ) : (
-        <span className="grid h-14 w-14 place-items-center rounded-lg border border-dashed border-[#cfe3c6] text-[10px] text-[#6d8a63]">
+        <span className="grid h-14 w-14 place-items-center rounded-lg border border-dashed border-[#e2e4e8] text-[10px] text-[#6d8a63]">
           None
         </span>
       )}
@@ -73,7 +73,7 @@ export function GalleryUpload({ value = [], onChange, folder }) {
     <div className="mt-1 flex flex-wrap items-center gap-2">
       {value.map((url, i) => (
         <span key={url + i} className="relative">
-          <img src={url} alt="" className="h-14 w-14 rounded-lg border border-[#cfe3c6] object-cover" />
+          <img src={url} alt="" className="h-14 w-14 rounded-lg border border-[#e2e4e8] object-cover" />
           <button
             type="button"
             aria-label="Remove image"

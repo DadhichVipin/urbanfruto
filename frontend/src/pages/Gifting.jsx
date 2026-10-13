@@ -12,7 +12,7 @@ const TIERS = [
   { id: "enterprise", label: "Enterprise", range: "150+ hampers", discount: 22, perks: ["Fully bespoke wooden chests", "Pan-India cold-chain dispatch", "Quarterly gifting calendar"] },
 ];
 
-const inputCls = "mt-1.5 w-full rounded-xl border border-[#cfe3c6] bg-white px-3.5 py-2.5 text-sm outline-none transition-colors focus:border-[#0f3d23]";
+const inputCls = "mt-1.5 w-full rounded-xl border border-[#e2e4e8] bg-white px-3.5 py-2.5 text-sm outline-none transition-colors focus:border-[#0f3d23]";
 
 export default function Gifting() {
   const [hampers, setHampers] = useState([]);
@@ -77,7 +77,7 @@ export default function Gifting() {
   if (done)
     return (
       <div data-testid="gifting-success" className="uf-shell py-20 text-center">
-        <span className="mx-auto grid h-16 w-16 place-items-center rounded-full bg-[#ddefd4]">
+        <span className="mx-auto grid h-16 w-16 place-items-center rounded-full bg-[#eef0f2]">
           <Check className="h-7 w-7 text-[#2f7a46]" />
         </span>
         <h1 className="uf-display mt-6 text-3xl font-bold text-[#0f3d23]">Quote Request Received</h1>
@@ -93,7 +93,7 @@ export default function Gifting() {
     );
 
   return (
-    <div data-testid="gifting-page" className="bg-[#eaf6e4]">
+    <div data-testid="gifting-page" className="bg-[#f7f7f8]">
       {/* HERO */}
       <section className="uf-shell pt-10">
         <span className="uf-chip"><Building2 className="h-3.5 w-3.5 text-[#2f7a46]" /> Corporate &amp; Bulk Gifting</span>
@@ -134,8 +134,8 @@ export default function Gifting() {
               key={t.id}
               data-testid={`tier-${t.id}`}
               onClick={() => setTierId(t.id)}
-              className={`relative flex min-w-0 flex-col rounded-2xl border bg-[#fcfdf8] p-5 text-left transition-all duration-300 hover:-translate-y-1 ${
-                tierId === t.id ? "border-[#e4601f] shadow-[0_22px_44px_-28px_rgba(15,61,35,0.5)]" : "border-[#d8e8d0]"
+              className={`relative flex min-w-0 flex-col rounded-2xl border bg-[#ffffff] p-5 text-left transition-all duration-300 hover:-translate-y-1 ${
+                tierId === t.id ? "border-[#e4601f] shadow-[0_22px_44px_-28px_rgba(15,61,35,0.5)]" : "border-[#e7e9ec]"
               }`}
             >
               {t.popular && (
@@ -226,13 +226,13 @@ export default function Gifting() {
                   <p className="uf-eyebrow text-[#e4601f]">Live Estimate</p>
                   <h3 className="uf-display mt-1 text-xl font-bold leading-tight text-[#0f3d23]">Your Bulk Quote</h3>
                 </div>
-                <span className="grid h-9 w-9 shrink-0 place-items-center rounded-xl bg-[#eef8e8]">
+                <span className="grid h-9 w-9 shrink-0 place-items-center rounded-xl bg-[#f5f6f7]">
                   <Gift className="h-4 w-4 text-[#2f7a46]" />
                 </span>
               </div>
 
               {selected && (
-                <div className="mt-4 flex items-center gap-3 rounded-xl bg-[#eef8e8] p-3">
+                <div className="mt-4 flex items-center gap-3 rounded-xl bg-[#f5f6f7] p-3">
                   <img src={selected.image} alt={selected.name} className="h-12 w-12 shrink-0 rounded-lg object-cover" />
                   <span className="min-w-0 leading-tight">
                     <b className="block truncate text-[12.5px] text-[#0f3d23]">{selected.name}</b>
@@ -247,13 +247,13 @@ export default function Gifting() {
                 <div className="flex justify-between"><dt className="text-[#6d8a63]">Your price / hamper</dt><dd data-testid="gifting-unit-price" className="font-semibold text-[#2f7a46]">{inr(unit)}</dd></div>
                 <div className="flex justify-between"><dt className="text-[#6d8a63]">Quantity</dt><dd className="font-semibold">{qty} hampers</dd></div>
                 <div className="flex justify-between"><dt className="text-[#6d8a63]">Delivery &amp; wicker packing</dt><dd className="font-semibold text-[#2f7a46]">Complimentary</dd></div>
-                <div className="mt-1 flex items-baseline justify-between border-t border-[#d8e8d0] pt-3">
+                <div className="mt-1 flex items-baseline justify-between border-t border-[#e7e9ec] pt-3">
                   <dt className="uf-display text-base font-bold">Estimate</dt>
                   <dd data-testid="gifting-estimate" className="uf-display text-2xl font-black text-[#e4601f]">{inr(estimate)}</dd>
                 </div>
               </dl>
 
-              <p data-testid="gifting-savings" className="mt-4 rounded-xl bg-[#ddefd4] p-3 text-[11.5px] font-semibold text-[#2f7a46]">
+              <p data-testid="gifting-savings" className="mt-4 rounded-xl bg-[#eef0f2] p-3 text-[11.5px] font-semibold text-[#2f7a46]">
                 You save {inr(saved)} at the {tier.label} tier ({tier.discount}% off).
               </p>
               <p className="mt-2 text-[10.5px] text-[#6d8a63]">

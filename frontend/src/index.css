@@ -1,0 +1,147 @@
+@import url('https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..900;1,9..144,300..900&family=Outfit:wght@300;400;500;600;700;800&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+    --uf-mint: 100 50% 93%;
+    --uf-mint-deep: 103 40% 88%;
+    --uf-ink: 154 59% 14%;
+    --uf-ink-soft: 154 30% 28%;
+    --uf-orange: 18 80% 50%;
+    --uf-cream: 60 33% 98%;
+}
+
+body {
+    margin: 0;
+    font-family: 'Outfit', ui-sans-serif, system-ui, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    background: #eaf6e4;
+    color: #0e3a22;
+}
+
+::selection {
+    background: #0f3d23;
+    color: #eaf6e4;
+}
+
+@layer base {
+    :root {
+        --background: 100 50% 93%;
+        --foreground: 154 59% 14%;
+        --card: 60 33% 98%;
+        --card-foreground: 154 59% 14%;
+        --popover: 60 33% 98%;
+        --popover-foreground: 154 59% 14%;
+        --primary: 154 59% 14%;
+        --primary-foreground: 60 33% 98%;
+        --secondary: 103 40% 88%;
+        --secondary-foreground: 154 59% 14%;
+        --muted: 103 30% 90%;
+        --muted-foreground: 154 15% 40%;
+        --accent: 18 80% 50%;
+        --accent-foreground: 0 0% 100%;
+        --destructive: 0 72% 45%;
+        --destructive-foreground: 0 0% 98%;
+        --border: 120 20% 84%;
+        --input: 120 20% 84%;
+        --ring: 154 59% 14%;
+        --radius: 0.9rem;
+    }
+}
+
+@layer base {
+    * {
+        @apply border-border;
+    }
+    body {
+        @apply bg-background text-foreground;
+    }
+}
+
+@layer components {
+    .uf-display {
+        font-family: 'Fraunces', Georgia, serif;
+        font-variation-settings: 'SOFT' 0, 'WONK' 0;
+        letter-spacing: -0.015em;
+    }
+    .uf-eyebrow {
+        @apply text-[11px] font-semibold tracking-[0.22em] uppercase;
+    }
+    .uf-card {
+        @apply rounded-2xl border border-[#d8e8d0] bg-[#fcfdf8];
+    }
+    .uf-chip {
+        @apply inline-flex items-center gap-1.5 rounded-full border border-[#d8e8d0] bg-white/80 px-3 py-1.5 text-xs font-medium;
+    }
+    .uf-shell {
+        @apply mx-auto w-full max-w-[1280px] px-4 sm:px-6 lg:px-10;
+    }
+    .uf-btn-dark {
+        @apply inline-flex items-center justify-center gap-2 rounded-xl bg-[#0f3d23] px-5 py-3 text-sm font-semibold text-[#f3fbee] transition-transform duration-200 hover:-translate-y-0.5 hover:bg-[#0b2f1b] active:translate-y-0;
+    }
+    .uf-btn-orange {
+        @apply inline-flex items-center justify-center gap-2 rounded-xl bg-[#e4601f] px-5 py-3 text-sm font-semibold text-white transition-transform duration-200 hover:-translate-y-0.5 hover:bg-[#cf5316] active:translate-y-0;
+    }
+    .uf-btn-ghost {
+        @apply inline-flex items-center justify-center gap-2 rounded-xl border border-[#cfe3c6] bg-white px-5 py-3 text-sm font-semibold text-[#0f3d23] transition-colors duration-200 hover:bg-[#eef8e8];
+    }
+    .uf-noise::before {
+        content: '';
+        position: absolute;
+        inset: 0;
+        pointer-events: none;
+        opacity: 0.35;
+        background-image: radial-gradient(#0f3d2310 1px, transparent 1px);
+        background-size: 18px 18px;
+    }
+}
+
+@keyframes uf-rise {
+    from { opacity: 0; transform: translateY(18px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+.uf-rise {
+    animation: uf-rise 0.7s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.uf-scroll-x {
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+}
+.uf-scroll-x::-webkit-scrollbar {
+    display: none;
+}
+
+@layer base {
+    [data-debug-wrapper="true"] {
+        display: contents !important;
+    }
+    [data-debug-wrapper="true"] > * {
+        margin-left: inherit;
+        margin-right: inherit;
+        margin-top: inherit;
+        margin-bottom: inherit;
+        padding-left: inherit;
+        padding-right: inherit;
+        padding-top: inherit;
+        padding-bottom: inherit;
+        column-gap: inherit;
+        row-gap: inherit;
+        gap: inherit;
+        border-left-width: inherit;
+        border-right-width: inherit;
+        border-top-width: inherit;
+        border-bottom-width: inherit;
+        border-left-style: inherit;
+        border-right-style: inherit;
+        border-top-style: inherit;
+        border-bottom-style: inherit;
+        border-left-color: inherit;
+        border-right-color: inherit;
+        border-top-color: inherit;
+        border-bottom-color: inherit;
+    }
+}
